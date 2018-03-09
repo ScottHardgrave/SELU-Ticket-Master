@@ -1,0 +1,42 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Tickets
+@model SP18.PF.Web.Areas.Admin.Models.Tickets.TicketViewModel
+@{
+    ViewData["Title"] = "Ticket Create";
+}
+<h2>Ticket</h2>
+<h4>Create</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" asp-items="@Model.UserSelectList" class="form-control"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventId" class="control-label"></label>
+                <select asp-for="EventId" asp-items="@Model.EventSelectList" class="form-control"></select>
+                <span asp-validation-for="EventId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchasePrice" class="control-label"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input asp-for="PurchasePrice" type="number" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control" />
+                </div>
+                <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,65 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Venues
+@model SP18.PF.Web.Areas.Admin.Models.Venues.VenueViewModel
+@{
+    ViewData["Title"] = "Venue Edit";
+}
+<h2>Venue</h2>
+<h4>Edit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input asp-for="Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress.AddressLine1" class="control-label"></label>
+                <input asp-for="PhysicalAddress.AddressLine1" class="form-control" />
+                <span asp-validation-for="PhysicalAddress.AddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress.AddressLine2" class="control-label"></label>
+                <input asp-for="PhysicalAddress.AddressLine2" class="form-control" />
+                <span asp-validation-for="PhysicalAddress.AddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress.City" class="control-label"></label>
+                <input asp-for="PhysicalAddress.City" class="form-control" />
+                <span asp-validation-for="PhysicalAddress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress.State" class="control-label"></label>
+                <select asp-for="PhysicalAddress.State" asp-items="@Model.StateList" class="form-control"></select>
+                <span asp-validation-for="PhysicalAddress.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress.ZipCode" class="control-label"></label>
+                <input asp-for="PhysicalAddress.ZipCode" class="form-control" />
+                <span asp-validation-for="PhysicalAddress.ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

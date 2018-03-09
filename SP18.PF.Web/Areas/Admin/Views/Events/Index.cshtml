@@ -1,0 +1,58 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Events
+@model IEnumerable<SP18.PF.Web.Areas.Admin.Models.Events.EventListingViewModel>
+@{
+    ViewData["Title"] = "Events Listing";
+}
+<h2>Events</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TourName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventEnd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TourName)
+                </td>
+                <td>
+                    @item.TicketPrice.ToString("C")
+                </td>
+                <td>
+                    @(item.EventStart == null ? string.Empty : item.EventStart.Value.ToString("M/d/yyyy h:mm tt"))
+                </td>
+                <td>
+                    @(item.EventEnd == null ? string.Empty : item.EventEnd.Value.ToString("M/d/yyyy h:mm tt"))
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,64 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Venues
+@model SP18.PF.Web.Areas.Admin.Models.Venues.VenueViewModel
+@{
+    ViewData["Title"] = "Venue Details";
+}
+<h2>Venue</h2>
+<h4>Details</h4>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalAddress.AddressLine1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalAddress.AddressLine1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalAddress.AddressLine2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalAddress.AddressLine2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalAddress.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalAddress.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalAddress.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalAddress.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalAddress.ZipCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalAddress.ZipCode)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

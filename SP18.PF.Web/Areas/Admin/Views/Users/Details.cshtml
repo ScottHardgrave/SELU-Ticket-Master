@@ -1,0 +1,58 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Users
+@model SP18.PF.Web.Areas.Admin.Models.Users.UserEditViewModel
+@{
+    ViewData["Title"] = "User Details";
+}
+<h2>User</h2>
+<h4>Details</h4>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.AddressLine1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.AddressLine1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.AddressLine2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.AddressLine2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.State)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.ZipCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.ZipCode)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

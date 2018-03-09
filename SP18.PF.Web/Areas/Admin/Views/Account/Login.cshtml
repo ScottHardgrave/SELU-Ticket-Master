@@ -1,0 +1,31 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Users
+@model SP18.PF.Web.Areas.Admin.Models.Users.LoginViewModel
+
+@{
+    // see :http://getbootstrap.com/docs/3.3/examples/signin/
+    ViewBag.Title = "Login";
+    Layout = "_LoginLayout";
+}
+
+<div class="container">
+    <form class="form-signin" asp-action="Login">
+        <input asp-for="ReturnUrl" type="hidden" />
+        <h2 class="form-signin-heading">Please sign in!</h2>
+        <label asp-for="Email" class="sr-only">Email address</label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email address" autofocus="">
+        <label asp-for="Password" class="sr-only">Password</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" asp-for="RemeberMe"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

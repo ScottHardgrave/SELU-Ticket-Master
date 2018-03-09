@@ -1,0 +1,40 @@
+﻿@using SP18.PF.Web.Areas.Admin.Models.Tickets
+@model SP18.PF.Web.Areas.Admin.Models.Tickets.TicketViewModel
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+<h2>Ticket</h2>
+<h4>Details</h4>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VenueName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TourName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TourName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchasePrice)
+        </dt>
+        <dd>
+            @Model.PurchasePrice.ToString("C")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
