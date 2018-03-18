@@ -7,7 +7,7 @@ namespace SP18.PF.Web.Services
     public class NoSearchService<TEntity, TDto> : SearchServiceBase<object, TEntity, TDto>
         where TEntity : class
     {
-        protected NoSearchService(IMapper mapper, DbContext dbContext) : base(mapper, dbContext)
+        public NoSearchService(IMapper mapper, DbContext dbContext) : base(mapper, dbContext)
         {
         }
 

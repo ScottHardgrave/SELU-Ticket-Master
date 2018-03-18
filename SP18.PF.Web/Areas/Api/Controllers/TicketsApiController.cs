@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SP18.PF.Web.Areas.Api.Models.Tickets;
+using SP18.PF.Core.Features.Tickets;
 using SP18.PF.Web.Services;
 
 namespace SP18.PF.Web.Areas.Api.Controllers
@@ -14,11 +15,14 @@ namespace SP18.PF.Web.Areas.Api.Controllers
     public class TicketsApiController : Controller
     {
         private readonly TicketService ticketService;
+ 
 
         public TicketsApiController(TicketService ticketService)
         {
             this.ticketService = ticketService;
         }
+
+    
 
         [HttpGet]
         [ProducesResponseType(typeof(TicketDto[]), (int)HttpStatusCode.OK)]
@@ -37,19 +41,22 @@ namespace SP18.PF.Web.Areas.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var user = User;
-            var result = await ticketService.GetUserTickets(user, x=>x.Id == id);
+            var result = await ticketService.GetUserTickets(user, x => x.Id == id);
             var record = result.SingleOrDefault();
             if (record == null)
             {
                 return NotFound();
             }
-            
+
             return Ok(record);
         }
 
+
+        
+
         [HttpPost("purchase/{eventId}")]
         [ProducesResponseType(typeof(TicketDto), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Dictionary<string,string[]>),(int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Dictionary<string, string[]>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public async Task<IActionResult> Purchase(int eventId)
         {
