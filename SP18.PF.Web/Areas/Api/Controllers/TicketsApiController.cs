@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SP18.PF.Web.Areas.Api.Models.Tickets;
 using SP18.PF.Core.Features.Tickets;
 using SP18.PF.Web.Services;
+using SP18.PF.Web.Data;
 
 namespace SP18.PF.Web.Areas.Api.Controllers
 {
@@ -15,6 +16,7 @@ namespace SP18.PF.Web.Areas.Api.Controllers
     public class TicketsApiController : Controller
     {
         private readonly TicketService ticketService;
+     
  
 
         public TicketsApiController(TicketService ticketService)
@@ -22,8 +24,7 @@ namespace SP18.PF.Web.Areas.Api.Controllers
             this.ticketService = ticketService;
         }
 
-    
-
+   
         [HttpGet]
         [ProducesResponseType(typeof(TicketDto[]), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

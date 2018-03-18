@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import request from 'request';
 import { Button } from 'reactstrap';
+import axios from 'axios';
 
 export class PurchaseTickets extends Component {
   displayName = PurchaseTickets.name
@@ -13,10 +14,19 @@ export class PurchaseTickets extends Component {
  
   }
 
-  getTicketInfo(){
+
+ getTicketInfo(){
+  axios.get('/api/tickets')
+  .then(response => {
+    const data = response.data;
+    console.log(response.data);
+    this.setState({tickets: data});
+  })
+  }
+  /*getTicketInfo(){
     let self =this;    
     var options = { method: 'GET',
-    url: 'http://localhost:49821/api/tickets',
+    url: '/api/allTickets',
     headers: 
      { 
        'cache-control': 'no-cache'
@@ -31,14 +41,14 @@ export class PurchaseTickets extends Component {
     console.log(JSON.parse(body));
   })
   }
-
+  */
 
   render() {
 
     return (
      
       <div>
-        <h1>My Tickets</h1>
+        <h1>Purchase Tickets</h1>
         <p>This component will be used to purchase tickets.</p>
         <table className='table'>
         <thead>
