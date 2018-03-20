@@ -21,6 +21,8 @@ namespace SP18.PF.Web.Data
             SeedTours(dataContext);
             SeedScheduledEvents(dataContext);
             SeedTickets(dataContext);
+            //AddAdminUser(dataContext);
+            //AddCustomerUser(dataContext);
         }
 
         private static void SeedTickets(DbContext dataContext)
@@ -32,7 +34,7 @@ namespace SP18.PF.Web.Data
             }
             var events = dataContext.Set<Event>().ToArray();
             var users = dataContext.Set<User>().ToArray();
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var @event = events[i % events.Length];
                 var user = users[i % users.Length];
@@ -49,11 +51,13 @@ namespace SP18.PF.Web.Data
 
         private static void SeedScheduledEvents(DbContext dataContext)
         {
+
             var events = dataContext.Set<Event>();
             if (events.Any())
             {
                 return;
             }
+            /*
             var tours = dataContext.Set<Tour>().Select(x => x.Id).ToArray();
             var venues = dataContext.Set<Venue>().Select(x => x.Id).ToArray();
             for (int i = 0; i < 100; i++)
@@ -63,16 +67,92 @@ namespace SP18.PF.Web.Data
                 {
                     var venue = venues[(i * 10 + j * 7) % venues.Length];
                     var start = DateTimeOffset.Now.AddDays(1 + i).AddHours(i);
-                    events.Add(new Event
-                    {
-                        TourId = tour,
-                        VenueId = venue,
-                        TicketPrice = (i + 1) * 3,
-                        EventStart = start,
-                        EventEnd = start.AddHours(j + 1)
-                    });
+                    */
+            events.Add(new Event
+            {
+                TourId = 1,
+                VenueId = 1,
+                TicketPrice = 22,
+                EventStart = new DateTime(2018, 05, 10, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 10, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 2,
+                VenueId = 1,
+                TicketPrice = 19,
+                EventStart = new DateTime(2018, 05, 11, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 11, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 3,
+                VenueId = 1,
+                TicketPrice = 10,
+                EventStart = new DateTime(2018, 05, 12, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 12, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 4,
+                VenueId = 1,
+                TicketPrice = 25,
+                EventStart = new DateTime(2018, 05, 13, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 13, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 5,
+                VenueId = 1,
+                TicketPrice = 13,
+                EventStart = new DateTime(2018, 05, 14, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 14, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 1,
+                VenueId = 2,
+                TicketPrice = 17,
+                EventStart = new DateTime(2018, 05, 11, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 11, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 1,
+                VenueId = 3,
+                TicketPrice = 15,
+                EventStart = new DateTime(2018, 05, 12, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 12, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 3,
+                VenueId = 2,
+                TicketPrice = 12,
+                EventStart = new DateTime(2018, 05, 10, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 10, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 3,
+                VenueId = 3,
+                TicketPrice = 22,
+                EventStart = new DateTime(2018, 05, 11, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 11, 19, 00, 00)
+            });
+            events.Add(new Event
+            {
+                TourId = 5,
+                VenueId = 3,
+                TicketPrice = 20,
+                EventStart = new DateTime(2018, 05, 22, 17, 00, 00),
+                EventEnd = new DateTime(2018, 05, 22, 19, 00, 00)
+            });
+            /*
+
                 }
             }
+            */
             dataContext.SaveChanges();
         }
 
@@ -83,14 +163,33 @@ namespace SP18.PF.Web.Data
             {
                 return;
             }
-            for (int i = 0; i < 100; i++)
+
+            tours.Add(new Tour
             {
-                tours.Add(new Tour
-                {
-                    Name = $"tour{i}",
-                    Description = $"Tour Description {i}"
-                });
-            }
+                Name = $"Sandy Tour",
+                Description = $"A tour for all the beach bums."
+            });
+            tours.Add(new Tour
+            {
+                Name = $"Not Your Fathers Tour",
+                Description = $"Not for the faint of heart. 18+ only."
+            });
+            tours.Add(new Tour
+            {
+                Name = $"Meat Eaters Tour",
+                Description = $"Can I have a steak with that steak?"
+            });
+            tours.Add(new Tour
+            {
+                Name = $"Heartwrench Tour",
+                Description = $"Gone through a breakup? Don't wallow in your self-pity alone."
+            });
+            tours.Add(new Tour
+            {
+                Name = $"アニメ音楽",
+                Description = $"Do you think animes have the best music? So do we!"
+            });
+
             dataContext.SaveChanges();
         }
 
@@ -101,24 +200,54 @@ namespace SP18.PF.Web.Data
             {
                 return;
             }
-            for (int i = 0; i < 100; i++)
+
+            venues.Add(new Venue
             {
-                venues.Add(new Venue
+                Name = $"Very Loud Music",
+                PhysicalAddress = new Address
                 {
-                    Name = $"venue{i}",
-                    PhysicalAddress = new Address
-                    {
-                        AddressLine1 = "123 place St",
-                        City = "Hammond",
-                        State = "LA",
-                        ZipCode = "70403"
-                    },
-                    Capacity = 10 * i,
-                    Description = $"Venue Description {i}"
-                });
-            }
+                    AddressLine1 = "123 South st",
+                    City = "Hammond",
+                    State = "LA",
+                    ZipCode = "70403"
+                },
+                Capacity = 100,
+                Description = $"Earplugs not included"
+            });
+            venues.Add(new Venue
+            {
+                Name = $"Little of this, little of that",
+                PhysicalAddress = new Address
+                {
+                    AddressLine1 = "123 Discovery St",
+                    City = "Hammond",
+                    State = "LA",
+                    ZipCode = "70403"
+                },
+                Capacity = 75,
+                Description = $"Something for everyone"
+            });
+            venues.Add(new Venue
+            {
+                Name = $"Fosters home for imaginary friends",
+                PhysicalAddress = new Address
+                {
+                    AddressLine1 = "123 Friend St",
+                    City = "Hammond",
+                    State = "LA",
+                    ZipCode = "70403"
+                },
+                Capacity = 150,
+                Description = $"You bring yourself, we bring the music"
+            });
+
             dataContext.SaveChanges();
         }
+
+
+
+
+
 
         private static void SeedUsers(DbContext dataContext)
         {
@@ -129,26 +258,61 @@ namespace SP18.PF.Web.Data
                 AddAdminUser(dataContext);
                 return;
             }
+
             AddAdminUser(dataContext);
+            /*
             for (int i = 0; i < 100; i++)
             {
-
-                users.Add(new User
+            */
+            users.Add(new User
+            {
+                Email = $"customer1@envoc.com",
+                Password = CryptoHelpers.HashPassword("password"),
+                Role = Roles.Customer,
+                BillingAddress = new Address
                 {
-                    Email = $"email{i}@envoc.com",
-                    Password = CryptoHelpers.HashPassword($"password{i}"),
-                    Role = Roles.Customer,
-                    BillingAddress = new Address
-                    {
-                        AddressLine1 = "123 place St",
-                        City = "Hammond",
-                        State = "LA",
-                        ZipCode = "70403"
-                    }
-                });
-            }
+                    AddressLine1 = "123 other place St",
+                    City = "Ponchatoula",
+                    State = "LA",
+                    ZipCode = "70454"
+                }
+            });
+            users.Add(new User
+            {
+                Email = $"customer2@envoc.com",
+                Password = CryptoHelpers.HashPassword("password"),
+                Role = Roles.Customer,
+                BillingAddress = new Address
+                {
+                    AddressLine1 = "123 That one St",
+                    City = "Ponchatoula",
+                    State = "LA",
+                    ZipCode = "70454"
+                }
+            });
+            users.Add(new User
+            {
+                Email = $"customer3@envoc.com",
+                Password = CryptoHelpers.HashPassword("password"),
+                Role = Roles.Customer,
+                BillingAddress = new Address
+                {
+                    AddressLine1 = "123 Not that place St",
+                    City = "Ponchatoula",
+                    State = "LA",
+                    ZipCode = "70454"
+                }
+            });
+            //}
             dataContext.SaveChanges();
         }
+
+
+
+
+
+
+
 
         private static void AddAdminUser(DbContext dataContext)
         {
@@ -172,5 +336,6 @@ namespace SP18.PF.Web.Data
             });
             dataContext.SaveChanges();
         }
+
     }
 }

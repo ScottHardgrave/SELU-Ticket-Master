@@ -38,6 +38,11 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='tags' /> My Tickets
               </NavItem>
             </LinkContainer>
+            <LinkContainer to={'/Venues'}>
+              <NavItem>
+                <Glyphicon glyph='tags' /> Venues
+              </NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

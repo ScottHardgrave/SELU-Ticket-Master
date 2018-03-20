@@ -6,6 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { MyTickets } from './components/MyTickets';
 import {PurchaseTickets} from './components/PurchaseTickets';
+import {Venues} from './components/Venues';
 import { Button } from 'reactstrap';
 
 
@@ -21,6 +22,7 @@ export default class App extends Component {
         <Route path='/fetchdata' component={FetchData} />
         <Route path='/mytickets' component={MyTickets}/>
         <Route path='/purchasetickets' component={PurchaseTickets}/>
+        <Route path='/Venues' component={Venues} />
       </Layout>
     );
   }

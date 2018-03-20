@@ -5,7 +5,7 @@ import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { Route } from 'react-router-dom';
 
-const KEYS_TO_FILTER = ['event.id']
+const KEYS_TO_FILTER = ['event.id', 'event.tourName', 'event.venueName']
 
 export class MyTickets extends Component {
   displayName = MyTickets.name
@@ -25,6 +25,7 @@ export class MyTickets extends Component {
       .then(response => {
         const data = response.data;
         const user = response.data[0].user.email;
+        console.log(data);
         this.setState({ tickets: data, userEmail: user });
       })
   }
@@ -55,6 +56,8 @@ export class MyTickets extends Component {
           <thead>
             <tr>
               <th>Event Name</th>
+              <th>Venue Name</th>
+              <th>Tour Name</th>
               <th>Purchase Price</th>
               <th>Event Date</th>
               <th></th>
@@ -66,6 +69,8 @@ export class MyTickets extends Component {
 
                 <tr key={ticket.id}>
                   <td>{ticket.event.id}</td>
+                  <td>{ticket.event.venueName}</td>
+                  <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>
                   <td>{ticket.event.eventStart.substring(0, 16)}</td>
                 </tr>
