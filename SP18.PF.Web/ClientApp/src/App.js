@@ -7,7 +7,6 @@ import { Counter } from './components/Counter';
 import { MyTickets } from './components/MyTickets';
 import {PurchaseTickets} from './components/PurchaseTickets';
 import {Venues} from './components/Venues';
-import { Button } from 'reactstrap';
 
 
 

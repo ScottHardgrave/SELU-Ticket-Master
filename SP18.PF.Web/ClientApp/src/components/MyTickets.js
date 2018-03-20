@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import request from 'request';
 import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
@@ -37,7 +36,6 @@ export class MyTickets extends Component {
     const RouteButton = () => (
       <Route render={({ history }) => (
         <Button
-          class='button button-blue'
           color='primary'
           onClick={() => { history.push('/purchasetickets') }}
         >

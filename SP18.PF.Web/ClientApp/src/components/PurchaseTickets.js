@@ -1,26 +1,97 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+import axios from 'axios';
+import SearchInput, { createFilter } from 'react-search-input';
+import Popup from 'reactjs-popup';
+
+const KEYS_TO_FILTER = ['event.id', 'event.tourName', 'event.venueName']
 
 export class PurchaseTickets extends Component {
   displayName = PurchaseTickets.name
 
+  constructor(props) {
+    super(props);
+    this.state = { tickets: [], loading: true, searchTerm: '' };
+    this.getTicketInfo = this.getTicketInfo.bind(this);
+    this.getTicketInfo();
+    this.searchUpdated = this.searchUpdated.bind(this)
+  }
+
+
+  getTicketInfo() {
+    axios.get('/allTickets')
+      .then(response => {
+        const data = response.data;
+        console.log(data)
+        this.setState({ tickets: data });
+      })
+  }
+
+
+
   render() {
+    const { tickets } = this.state;
+    const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
     return (
+
       <div>
-        <h1>Yo DAWHG!</h1>
-        <p>dIS WHERE yOU bUY tiCKETs DAWWHWHW</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
+        <h1>Purchase Tickets</h1>
+        <p>Choose From Tickets Below</p>
+        <SearchInput className="search-input" onChange={this.searchUpdated} />
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Venue Name</th>
+              <th>Tour Name</th>
+              <th>Purchase Price</th>
+              <th>Event Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterTickets.map(ticket => {
+              return (
+
+                <tr key={ticket.id}>
+                  <td>{ticket.event.id}</td>
+                  <td>{ticket.event.venueName}</td>
+                  <td>{ticket.event.tourName}</td>
+                  <td>{ticket.purchasePrice}</td>
+                  <td>{ticket.event.eventStart.substring(0, 16)}</td>
+                  <td><Popup trigger={<Button color='primary'>Purchase Ticket</Button>}
+                    modal
+                    closeOnDocumentClick>
+                    {close => (
+                      <div>
+                        <h1>Finish Purchase Order</h1>
+                        <form>
+                          <label>
+                            Name:
+                           <input type="text" name="name" />
+                            Billing Address:
+                           <input type="text" name="billingAddress" />
+                           Credit/Debit Card Info:
+                           <input type="text" name="CreditCard" />
+                          </label>
+                        </form>
+                        <a className="close" onClick={close}>
+                          &times;
+                      </a>
+                      </div>
+                    )}
+                  </Popup></td>
+                </tr>
+              )
+
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
+  searchUpdated(term) {
+    this.setState({ searchTerm: term })
+  }
 }
+
