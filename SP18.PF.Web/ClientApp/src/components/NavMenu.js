@@ -61,7 +61,7 @@ export class NavMenu extends Component {
             </LinkContainer>
             <LinkContainer to={'/Venues'}>
               <NavItem>
-                <Glyphicon glyph='tags' /> Venues
+                <Glyphicon glyph='cd' /> Venues
               </NavItem>
             </LinkContainer>
             {this.state.logged ?
