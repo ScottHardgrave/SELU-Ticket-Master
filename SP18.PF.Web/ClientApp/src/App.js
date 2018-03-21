@@ -6,7 +6,8 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { MyTickets } from './components/MyTickets';
 import {PurchaseTickets} from './components/PurchaseTickets';
-import {Venues} from './components/Venues';
+import { Venues } from './components/Venues';
+import { Events } from './components/Events';
 
 
 
@@ -22,6 +23,7 @@ export default class App extends Component {
         <Route path='/mytickets' component={MyTickets}/>
         <Route path='/purchasetickets' component={PurchaseTickets}/>
         <Route path='/Venues' component={Venues} />
+        <Route path='/Events' component={Events} />
       </Layout>
     );
   }

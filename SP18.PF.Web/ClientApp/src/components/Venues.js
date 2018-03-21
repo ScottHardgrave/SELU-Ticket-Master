@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import request from 'request';
+import { Button } from 'reactstrap';
+import { Route } from 'react-router-dom';
 
 export class Venues extends Component {
     displayName = Venues.name
@@ -22,6 +24,16 @@ export class Venues extends Component {
             })
     }
     render() {
+        const RouteButton = () => (
+            <Route render={({ history }) => (
+                <Button
+                    color='primary'
+                    onClick={() => { history.push('/Events') }}
+                >
+                    Events
+    </Button>
+            )} />
+        )
 
         return (
 
@@ -34,6 +46,7 @@ export class Venues extends Component {
                             <th>Venue name</th>
                             <th>Address</th>
                             <th>Description</th>
+                            <th></th>
                             
                         </tr>
                     </thead>
@@ -44,6 +57,7 @@ export class Venues extends Component {
                                     <td>{venues.name}</td>
                                     <td>{venues.physicalAddress.addressLine1}{" "}{venues.physicalAddress.city}{" "}{venues.physicalAddress.state}{" "}{venues.physicalAddress.zipCode}</td>
                                     <td>{venues.description}</td>
+                                    <td><RouteButton /></td>
 
                                 </tr>
                             )
