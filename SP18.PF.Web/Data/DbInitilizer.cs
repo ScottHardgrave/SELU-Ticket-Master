@@ -203,7 +203,7 @@ namespace SP18.PF.Web.Data
 
             venues.Add(new Venue
             {
-                Name = $"Very Loud Music",
+                Name = $"Dimmsdale Dimmadome",
                 PhysicalAddress = new Address
                 {
                     AddressLine1 = "123 South st",
@@ -212,11 +212,11 @@ namespace SP18.PF.Web.Data
                     ZipCode = "70403"
                 },
                 Capacity = 100,
-                Description = $"Earplugs not included"
+                Description = $"Owned by Doug Dimmadome"
             });
             venues.Add(new Venue
             {
-                Name = $"Little of this, little of that",
+                Name = $"Tiger Stadium",
                 PhysicalAddress = new Address
                 {
                     AddressLine1 = "123 Discovery St",
@@ -225,11 +225,11 @@ namespace SP18.PF.Web.Data
                     ZipCode = "70403"
                 },
                 Capacity = 75,
-                Description = $"Something for everyone"
+                Description = $"Home of the tigers"
             });
             venues.Add(new Venue
             {
-                Name = $"Fosters home for imaginary friends",
+                Name = $"House of Blues",
                 PhysicalAddress = new Address
                 {
                     AddressLine1 = "123 Friend St",
@@ -238,7 +238,7 @@ namespace SP18.PF.Web.Data
                     ZipCode = "70403"
                 },
                 Capacity = 150,
-                Description = $"You bring yourself, we bring the music"
+                Description = $"Keeping Jazz alive"
             });
 
             dataContext.SaveChanges();
