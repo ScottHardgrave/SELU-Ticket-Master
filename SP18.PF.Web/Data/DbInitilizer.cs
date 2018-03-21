@@ -73,7 +73,7 @@ namespace SP18.PF.Web.Data
                 TourId = 1,
                 VenueId = 1,
                 TicketPrice = 22,
-                EventStart = new DateTime(2018, 05, 10, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 10, 18, 30, 00),
                 EventEnd = new DateTime(2018, 05, 10, 19, 00, 00)
             });
             events.Add(new Event
@@ -81,7 +81,7 @@ namespace SP18.PF.Web.Data
                 TourId = 2,
                 VenueId = 1,
                 TicketPrice = 19,
-                EventStart = new DateTime(2018, 05, 11, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 11, 15, 00, 00),
                 EventEnd = new DateTime(2018, 05, 11, 19, 00, 00)
             });
             events.Add(new Event
@@ -97,7 +97,7 @@ namespace SP18.PF.Web.Data
                 TourId = 4,
                 VenueId = 1,
                 TicketPrice = 25,
-                EventStart = new DateTime(2018, 05, 13, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 13, 13, 30, 00),
                 EventEnd = new DateTime(2018, 05, 13, 19, 00, 00)
             });
             events.Add(new Event
@@ -105,7 +105,7 @@ namespace SP18.PF.Web.Data
                 TourId = 5,
                 VenueId = 1,
                 TicketPrice = 13,
-                EventStart = new DateTime(2018, 05, 14, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 14, 12, 00, 00),
                 EventEnd = new DateTime(2018, 05, 14, 19, 00, 00)
             });
             events.Add(new Event
@@ -113,7 +113,7 @@ namespace SP18.PF.Web.Data
                 TourId = 1,
                 VenueId = 2,
                 TicketPrice = 17,
-                EventStart = new DateTime(2018, 05, 11, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 11, 16, 00, 00),
                 EventEnd = new DateTime(2018, 05, 11, 19, 00, 00)
             });
             events.Add(new Event
@@ -121,7 +121,7 @@ namespace SP18.PF.Web.Data
                 TourId = 1,
                 VenueId = 3,
                 TicketPrice = 15,
-                EventStart = new DateTime(2018, 05, 12, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 12, 18, 30, 00),
                 EventEnd = new DateTime(2018, 05, 12, 19, 00, 00)
             });
             events.Add(new Event
@@ -129,7 +129,7 @@ namespace SP18.PF.Web.Data
                 TourId = 3,
                 VenueId = 2,
                 TicketPrice = 12,
-                EventStart = new DateTime(2018, 05, 10, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 10, 12, 00, 00),
                 EventEnd = new DateTime(2018, 05, 10, 19, 00, 00)
             });
             events.Add(new Event
@@ -145,7 +145,7 @@ namespace SP18.PF.Web.Data
                 TourId = 5,
                 VenueId = 3,
                 TicketPrice = 20,
-                EventStart = new DateTime(2018, 05, 22, 17, 00, 00),
+                EventStart = new DateTime(2018, 05, 22, 13, 30, 00),
                 EventEnd = new DateTime(2018, 05, 22, 19, 00, 00)
             });
             /*
@@ -209,7 +209,7 @@ namespace SP18.PF.Web.Data
                     AddressLine1 = "123 South st",
                     City = "Dimmsdale",
                     State = "LA",
-                    ZipCode = "70403"
+                    ZipCode = "12345"
                 },
                 Capacity = 100,
                 Description = $"Owned by Doug Dimmadome"
@@ -220,11 +220,11 @@ namespace SP18.PF.Web.Data
                 PhysicalAddress = new Address
                 {
                     AddressLine1 = "123 Discovery St",
-                    City = "Hammond",
+                    City = "Baton Rouge",
                     State = "LA",
-                    ZipCode = "70403"
+                    ZipCode = "70805"
                 },
-                Capacity = 75,
+                Capacity = 15000,
                 Description = $"Home of the tigers"
             });
             venues.Add(new Venue
@@ -233,11 +233,11 @@ namespace SP18.PF.Web.Data
                 PhysicalAddress = new Address
                 {
                     AddressLine1 = "123 Friend St",
-                    City = "Hammond",
+                    City = "New Orleans",
                     State = "LA",
-                    ZipCode = "70403"
+                    ZipCode = "70150"
                 },
-                Capacity = 150,
+                Capacity = 500,
                 Description = $"Keeping Jazz alive"
             });
 

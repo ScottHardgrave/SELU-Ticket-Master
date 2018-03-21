@@ -50,7 +50,8 @@ export class Events extends Component {
                                     <td>{events.venueName}</td>
                                     <td>{events.tourName}</td>
                                     <td>{events.ticketPrice}</td>
-                                    <td>{events.eventStart.substring(5, 7)}{"/"}{events.eventStart.substring(8, 10)}{"/"}{events.eventStart.substring(0, 4)}{"  "}{events.eventStart.substring(21, 25)}{" PM"}</td>
+                                    <td>{events.eventStart}</td>
+                                        {/*.substring(5, 7)}{"/"}{events.eventStart.substring(8, 10)}{"/"}{events.eventStart.substring(0, 4)}{"  "}{events.eventStart.substring(11, 16)}{" PM"}</td> */}
                                     <td>{<Button color='primary'>Purchase</Button>}</td>
 
                                 </tr>
