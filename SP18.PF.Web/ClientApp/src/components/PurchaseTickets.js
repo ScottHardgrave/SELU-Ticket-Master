@@ -14,10 +14,17 @@ export class PurchaseTickets extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { tickets: [], loading: true, searchTerm: '', cardNumber: [], expiry: [], cvc: [], };
+    this.state =
+      {
+        tickets: [],
+        loading: true, searchTerm: '',
+        cardNumber: [], expiry: [],
+        cvc: [], venues: []
+      };
     this.getTicketInfo = this.getTicketInfo.bind(this);
     this.getTicketInfo();
     this.searchUpdated = this.searchUpdated.bind(this)
+    this.getVenueInfo = this.getVenueInfo.bind(this);
   }
 
 
@@ -25,15 +32,25 @@ export class PurchaseTickets extends Component {
     axios.get('/allTickets')
       .then(response => {
         const data = response.data;
-        console.log(data)
+        console.log(data);
         this.setState({ tickets: data });
+      })
+  }
+
+
+  getVenueInfo(venueId) {
+    axios.get('/api/venues/1')
+      .then(response => {
+        const venueData = response.data;
+        console.log(venueData);
+        this.setState({ venues: venueData });
       })
   }
 
 
 
   render() {
-    const { tickets } = this.state;
+    const { tickets, venues } = this.state;
     const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
     return (
       <div>
@@ -60,93 +77,133 @@ export class PurchaseTickets extends Component {
                   <td>{ticket.event.venueName}</td>
                   <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>
-                  <td>{ticket.event.eventStart.substring(0, 16)}</td>
+                  <td>{ticket.event.eventStart.substring(5, 7)}{"/"}{ticket.event.eventStart.substring(8, 10)}{"/"}{ticket.event.eventStart.substring(0, 4)}{"  "}{ticket.event.eventStart.substring(21, 25)}{" PM"}</td>
                   <td><Popup trigger={<Button color='primary'>Purchase Ticket</Button>}
                     modal
                     closeOnDocumentClick>
                     {close => (
-                      <div class="col-sm-9"> Billing Information
-                      <div class="form-group text-left">
-                          <label>Address</label>
-                          <input type="text" id="purchaseFormAddressLine1" placeholder="Address Line 1" class="form-control errorInputOutline" />
-                          <input type="text" id="purchaseFormAddressLine2" placeholder="Address Line 2" class="form-control validInputOutline" />
-                        </div>
-                        <div class="form-group text-left">
-                          <label for="billingCity">City</label>
-                          <input type="text" id="billingCity" placeholder="City" class="form-control errorInputOutline" value="" />
-                        </div>
-                        <div class="form-group text-left">
-                          <label for="billingState">State</label>
-                          <select id="dropdown" class="form-control">
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="DC">District Of Columbia</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
-                          </select>
+                      <form>
+                        <div class="col-sm-9"><label>Ticket Information:</label>
+                          <div class="form-group text-left">
+                            <label class="col-sm-3">
+                              Ticket:
+                           </label>
+                            <label class="col-sm-9">
+                              {ticket.event.venueName} , {ticket.event.tourName}
+                            </label> 
+                          </div>               
+                          <div class="form-group text-left">
+                            <label class="col-sm-3">
+                              Subtotal:
+                            </label>
+                            <label class="col-sm-9">
+                              $ {ticket.purchasePrice}
+                            </label>
                           </div>
                           <div class="form-group text-left">
-                          <label for="billingZipCode">ZipCode</label>
-                          <input type="text" id="billingZipCode" placeholder="70706" maxLength="5" class="form-control errorInputOutline" />
+                            <label class="col-sm-3">
+                              Tax:
+                            </label>
+                            <label class="col-sm-9">
+                              $ {(.0825 * ticket.purchasePrice).toFixed(2)}
+                            </label>
                           </div>
                           <div class="form-group text-left">
-                          <label for="billingCardHolderName">Card Holder Name</label>
-                          <input type="text" id="billingCardHolderName" placeholder="Name Here" class="form-control errorInputOutline" />
+                            <label class="col-sm-3">
+                              Total:
+                            </label>
+                            <label class="col-sm-9">
+                              $ {(ticket.purchasePrice + (.0825 * ticket.purchasePrice)).toFixed(2)}
+                            </label>
                           </div>
-                        
-                        <CreditCardInput fieldStyle='wrapper'
-                          cardNumberInputProps={{ input: this.state.cardNumber, onChange: this.handleCardNumberChange }} 
-                          cardExpiryInputProps={{ input: this.state.expiry, onChange: this.handleCardExpiryChange }}
-                          cardCVCInputProps={{ input: this.state.cvc, onChange: this.handleCardCVCChange }}
-                          fieldClassName="input"
-                        />
-                      </div>
+
+                          <div><label>Billing Information:</label>
+                            <div class="form-group text-left">
+                              <label>Address</label>
+                              <input type="text" id="purchaseFormAddressLine1" placeholder="Address Line 1" class="form-control errorInputOutline" />
+                              <input type="text" id="purchaseFormAddressLine2" placeholder="Address Line 2" class="form-control validInputOutline" />
+                            </div>
+                            <div class="form-group text-left">
+                              <label for="billingCity">City</label>
+                              <input type="text" id="billingCity" placeholder="City" class="form-control errorInputOutline" value="" />
+                            </div>
+                            <div class="form-group text-left">
+                              <label for="billingState">State</label>
+                              <select id="dropdown" class="form-control">
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                              </select>
+                            </div>
+                            <div class="form-group text-left">
+                              <label for="billingZipCode">ZipCode</label>
+                              <input type="text" id="billingZipCode" placeholder="70706" maxLength="5" class="form-control errorInputOutline" />
+                            </div>
+                            <div class="form-group text-left">
+                              <label for="billingCardHolderName">Card Holder Name</label>
+                              <input type="text" id="billingCardHolderName" placeholder="Name Here" class="form-control errorInputOutline" />
+                            </div>
+
+                            <CreditCardInput fieldStyle='wrapper'
+                              cardNumberInputProps={{ input: this.state.cardNumber, onChange: this.handleCardNumberChange }}
+                              cardExpiryInputProps={{ input: this.state.expiry, onChange: this.handleCardExpiryChange }}
+                              cardCVCInputProps={{ input: this.state.cvc, onChange: this.handleCardCVCChange }}
+                              fieldClassName="input"
+                            />
+                          </div>
+                          <div class="col-md-6 col-md-offset-3">
+                            <Button color='primary'>Purchase</Button>
+                          </div>
+                        </div>
+                      </form>
                     )}
                   </Popup></td>
                 </tr>
