@@ -7,7 +7,7 @@ import CreditCardInput from 'react-credit-card-input';
 
 
 
-const KEYS_TO_FILTER = ['event.id', 'event.tourName', 'event.venueName']
+const KEYS_TO_FILTER = ['id', 'tourName', 'venueName']
 
 export class PurchaseTickets extends Component {
   displayName = PurchaseTickets.name
@@ -30,10 +30,10 @@ export class PurchaseTickets extends Component {
 
 
   getTicketInfo() {
-    axios.get('/allTickets')
+    axios.get('/api/events')
       .then(response => {
         const data = response.data;
-        console.log(response.data[1].event.venueId);
+        console.log(data);
         this.setState({ tickets: data });
       })
   }
@@ -78,18 +78,18 @@ export class PurchaseTickets extends Component {
               return (
 
                 <tr key={ticket.id}>
-                  <td>{ticket.event.id}</td>
-                  <td>{ticket.event.venueName}</td>
-                  <td>{ticket.event.tourName}</td>
-                  <td>{ticket.purchasePrice}</td>
-                  <td>{ticket.event.eventStart.substring(5, 7)}{"/"}{ticket.event.eventStart.substring(8, 10)}{"/"}{ticket.event.eventStart.substring(0, 4)}{"  "}{ticket.event.eventStart.substring(21, 25)}{" PM"}</td>
+                  <td>{ticket.id}</td>
+                  <td>{ticket.venueName}</td>
+                  <td>{ticket.tourName}</td>
+                  <td>{ticket.ticketPrice}</td>
+                  <td>{ticket.eventStart.substring(5, 7)}{"/"}{ticket.eventStart.substring(8, 10)}{"/"}{ticket.eventStart.substring(0, 4)}{"  "}{ticket.eventStart.substring(21, 25)}{" PM"}</td>
                   <td><Popup trigger={<Button color='primary' type='submit' active>Purchase Ticket</Button>}
                     modal
                     lockScroll={false}
                     closeOnDocumentClick>
                     {close => (
                       <form>
-                        {this.getVenueInfo(ticket.event.venueId)}
+                        {this.getVenueInfo(ticket.venueId)}
                         <div class="col-sm-9"><label>Ticket Information:</label>
                           <div class="form-group text-left">
                             <label class="col-sm-3">
@@ -97,7 +97,7 @@ export class PurchaseTickets extends Component {
                            </label>
                             <label class="col-sm-9">
                     <Popup trigger={<Button color='primary' size="sm">
-                    {ticket.event.tourName} at  {ticket.event.venueName} 
+                    {ticket.tourName} at  {ticket.venueName} 
                     </Button>}>
                     <div> Address: {venueAdd}{"  "}{venuesCity},{venuesState}{"  "}{venueZip}</div>
                     <div> Capacity: {venues.capacity} </div>
@@ -110,7 +110,7 @@ export class PurchaseTickets extends Component {
                               Subtotal: 
                             </label>
                             <label class="col-sm-9">
-                              $ {ticket.purchasePrice}
+                              $ {ticket.ticketPrice}
                             </label>
                           </div>
                           <div class="form-group text-left">
@@ -118,7 +118,7 @@ export class PurchaseTickets extends Component {
                               Tax:
                             </label>
                             <label class="col-sm-9">
-                              $ {(.0825 * ticket.purchasePrice).toFixed(2)}
+                              $ {(.0825 * ticket.ticketPrice).toFixed(2)}
                             </label>
                           </div>
                           <div class="form-group text-left">
@@ -126,7 +126,7 @@ export class PurchaseTickets extends Component {
                               Total:
                             </label>
                             <label class="col-sm-9">
-                              $ {(ticket.purchasePrice + (.0825 * ticket.purchasePrice)).toFixed(2)}
+                              $ {(ticket.ticketPrice + (.0825 * ticket.ticketPrice)).toFixed(2)}
                             </label>
                           </div>
 
