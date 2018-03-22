@@ -18,8 +18,9 @@ export class PurchaseTickets extends Component {
       {
         tickets: [],
         loading: true, searchTerm: '',
-        cardNumber: [], expiry: [],
-        cvc: [], venues: []
+        cardNumber: '', expiry: '',
+        cvc: '', venues: [], venuesCity: [],
+        venuesState: [], venueZip: [], venueAdd: []
       };
     this.getTicketInfo = this.getTicketInfo.bind(this);
     this.getTicketInfo();
@@ -32,25 +33,29 @@ export class PurchaseTickets extends Component {
     axios.get('/allTickets')
       .then(response => {
         const data = response.data;
-        console.log(data);
+        console.log(response.data[1].event.venueId);
         this.setState({ tickets: data });
       })
   }
 
 
   getVenueInfo(venueId) {
-    axios.get('/api/venues/1')
+    axios.get('/api/venues/' + venueId)
       .then(response => {
         const venueData = response.data;
-        console.log(venueData);
-        this.setState({ venues: venueData });
+        const city = response.data.physicalAddress.city;
+        const state = response.data.physicalAddress.state;
+        const add = response.data.physicalAddress.addressLine1;
+        const zip = response.data.physicalAddress.zipCode;
+        this.setState({ venues: venueData , venuesCity: city, venueZip: zip,
+          venuesState: state, venueAdd: add});
       })
   }
 
 
 
   render() {
-    const { tickets, venues } = this.state;
+    const { tickets, venues, venuesCity, venueAdd, venuesState, venueZip } = this.state;
     const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
     return (
       <div>
@@ -78,23 +83,31 @@ export class PurchaseTickets extends Component {
                   <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>
                   <td>{ticket.event.eventStart.substring(5, 7)}{"/"}{ticket.event.eventStart.substring(8, 10)}{"/"}{ticket.event.eventStart.substring(0, 4)}{"  "}{ticket.event.eventStart.substring(21, 25)}{" PM"}</td>
-                  <td><Popup trigger={<Button color='primary'>Purchase Ticket</Button>}
+                  <td><Popup trigger={<Button color='primary' type='submit' active>Purchase Ticket</Button>}
                     modal
+                    lockScroll={false}
                     closeOnDocumentClick>
                     {close => (
                       <form>
+                        {this.getVenueInfo(ticket.event.venueId)}
                         <div class="col-sm-9"><label>Ticket Information:</label>
                           <div class="form-group text-left">
                             <label class="col-sm-3">
                               Ticket:
                            </label>
                             <label class="col-sm-9">
-                              {ticket.event.venueName} , {ticket.event.tourName}
-                            </label> 
-                          </div>               
+                    <Popup trigger={<Button color='primary' size="sm">
+                    {ticket.event.tourName} at  {ticket.event.venueName} 
+                    </Button>}>
+                    <div> Address: {venueAdd}{"  "}{venuesCity},{venuesState}{"  "}{venueZip}</div>
+                    <div> Capacity: {venues.capacity} </div>
+                    <div> Description: {venues.description}</div>
+                    </Popup>
+                            </label>
+                          </div>
                           <div class="form-group text-left">
                             <label class="col-sm-3">
-                              Subtotal:
+                              Subtotal: 
                             </label>
                             <label class="col-sm-9">
                               $ {ticket.purchasePrice}
@@ -192,10 +205,10 @@ export class PurchaseTickets extends Component {
                               <input type="text" id="billingCardHolderName" placeholder="Name Here" class="form-control errorInputOutline" />
                             </div>
 
-                            <CreditCardInput fieldStyle='wrapper'
-                              cardNumberInputProps={{ input: this.state.cardNumber, onChange: this.handleCardNumberChange }}
-                              cardExpiryInputProps={{ input: this.state.expiry, onChange: this.handleCardExpiryChange }}
-                              cardCVCInputProps={{ input: this.state.cvc, onChange: this.handleCardCVCChange }}
+                            <CreditCardInput
+                              cardNumberInputProps={{ value: this.state.cardNumber, onChange: this.handleCardNumberChange }}
+                              cardExpiryInputProps={{ value: this.state.expiry, onChange: this.handleCardExpiryChange }}
+                              cardCVCInputProps={{ value: this.state.cvc, onChange: this.handleCardCVCChange }}
                               fieldClassName="input"
                             />
                           </div>
