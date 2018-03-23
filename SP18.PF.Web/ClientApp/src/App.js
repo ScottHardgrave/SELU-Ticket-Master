@@ -8,6 +8,7 @@ import { MyTickets } from './components/MyTickets';
 import {PurchaseTickets} from './components/PurchaseTickets';
 import { Venues } from './components/Venues';
 import { Events } from './components/Events';
+import { Venue } from './components/Venue';
 
 
 
@@ -25,7 +26,8 @@ export default class App extends Component {
         <Route path='/mytickets' component={MyTickets}/>
         <Route path='/purchasetickets' component={PurchaseTickets}/>
         <Route path='/Venues' component={Venues} />
-        <Route path='/Events' component={Events} />
+        {/*<Route path='/Events' component={Events} />*/}
+        <Route path='/Venue/:id' component={Venue} />
       </Layout>
     );
   }

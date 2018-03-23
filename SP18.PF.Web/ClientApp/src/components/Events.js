@@ -2,6 +2,7 @@
 import axios from 'axios';
 import request from 'request';
 import { Button } from 'reactstrap';
+import { FormattedDate, FormattedRelative } from 'react-intl';
 
 
 export class Events extends Component {
@@ -9,29 +10,58 @@ export class Events extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { events: [], loading: true };
+        this.state = {
+            events: [], venue: { name:"" }, loading: true };
         this.getEventInfo = this.getEventInfo.bind(this);
-        this.getEventInfo();
+        this.getVenueInfo = this.getVenueInfo.bind(this);
+    }
 
+    componentDidMount() {
+        this.getEventInfo();
+        this.getVenueInfo();
     }
 
     getEventInfo() {
-        axios.get('/api/events')
+        console.log("Props for events.")
+        console.log(this.props);
+        //this.props.match.params.id;
+
+        axios.get('/api/events',
+            {
+                params: {
+                    venueId: this.props.venueId
+                }
+            })
             .then(response => {
                 const data = response.data;
                 console.log(response.data);
                 this.setState({ events: data });
             })
     }
+
+    getVenueInfo() {
+        console.log("Props for events.")
+        console.log(this.props);
+        //this.props.match.params.id;
+
+        axios.get('/api/venues/' + this.props.venueId)
+            .then(response => {
+                const data = response.data;
+                console.log(response.data);
+                this.setState({ venue: data });
+            })
+    }
+
     render() {
+
 
         return (
 
             <div>
-                <h1>Events</h1>
+                <h1>{this.state.venue.name} events</h1>
                 
 
-                <p>All of the venues</p>
+
                 <table className='table'>
                     <thead>
                         <tr>
@@ -43,15 +73,28 @@ export class Events extends Component {
 
                         </tr>
                     </thead>
+                    
                     <tbody>
                         {this.state.events.map(events => {
+                            var newDate = Date.parse(events.eventStart);
+                            var parsed = new Date(newDate);
                             return (
                                 <tr key={events.tourId}>
                                     <td>{events.venueName}</td>
                                     <td>{events.tourName}</td>
                                     <td>{events.ticketPrice}</td>
-                                    <td>{events.eventStart}</td>
-                                        {/*.substring(5, 7)}{"/"}{events.eventStart.substring(8, 10)}{"/"}{events.eventStart.substring(0, 4)}{"  "}{events.eventStart.substring(11, 16)}{" PM"}</td> */}
+                                    <td>{
+                                        <FormattedDate value={parsed}
+                                            month="numeric"
+                                            day="numeric"
+                                            year="numeric"
+                                            hour="numeric"
+                                            minute="numeric"
+
+
+                                        />}
+
+                                    </td>
                                     <td>{<Button color='primary'>Purchase</Button>}</td>
 
                                 </tr>

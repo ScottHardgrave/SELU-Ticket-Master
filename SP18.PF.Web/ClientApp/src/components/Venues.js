@@ -24,11 +24,11 @@ export class Venues extends Component {
             })
     }
     render() {
-        const RouteButton = () => (
+        const RouteButton = ({ venueId }) => (
             <Route render={({ history }) => (
                 <Button
                     color='primary'
-                    onClick={() => { history.push('/Events') }}
+                    onClick={() => { history.push(`/Venue/${venueId}`) }}
                 >
                     Events
     </Button>
@@ -57,7 +57,7 @@ export class Venues extends Component {
                                     <td>{venues.name}</td>
                                     <td>{venues.physicalAddress.addressLine1}{" "}{venues.physicalAddress.city}{" "}{venues.physicalAddress.state}{" "}{venues.physicalAddress.zipCode}</td>
                                     <td>{venues.description}</td>
-                                    <td><RouteButton /></td>
+                                    <td><RouteButton venueId={venues.id} /></td>
 
                                 </tr>
                             )
