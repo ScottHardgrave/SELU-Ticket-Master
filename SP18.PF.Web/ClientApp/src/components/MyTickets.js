@@ -70,7 +70,7 @@ export class MyTickets extends Component {
                   <td>{ticket.event.venueName}</td>
                   <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>
-                  <td>{ticket.event.eventStart.substring(0, 16)}</td>
+                  <td>{ticket.event.eventStart.substring(5, 7)}{"/"}{ticket.event.eventStart.substring(8, 10)}{"/"}{ticket.event.eventStart.substring(0, 4)}{"  "}{ticket.event.eventStart.substring(21, 25)}{" PM"}</td>
                 </tr>
               )
 

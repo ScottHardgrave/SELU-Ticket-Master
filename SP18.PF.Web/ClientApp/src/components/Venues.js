@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import request from 'request';
 import { Button } from 'reactstrap';
 import { Route } from 'react-router-dom';
 
