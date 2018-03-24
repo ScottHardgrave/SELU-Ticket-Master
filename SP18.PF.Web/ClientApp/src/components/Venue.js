@@ -5,7 +5,7 @@ import { Button } from 'reactstrap';
 import { FormattedDate, FormattedRelative } from 'react-intl';
 import { Events } from './Events';
 import { PurchaseTickets } from './PurchaseTickets';
-import { Route } from 'react-router-dom';
+
 
 
 
