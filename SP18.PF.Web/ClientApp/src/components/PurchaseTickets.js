@@ -12,6 +12,7 @@ import {
 } from './utils';
 import { withAlert } from 'react-alert';
 import { withRouter } from 'react-router-dom';
+import { Link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 var musicPicture = require('../../src/music.jpg')
 const KEYS_TO_FILTER = ['tourName', 'venueName', 'eventStart']
 
@@ -159,6 +160,11 @@ export class PurchaseTickets extends Component {
                     lockScroll={false}
                     closeOnDocumentClick>
                     {close => (
+                       <Element id="containerElement" style={{
+                        position: 'relative',
+                        height:'600px',
+                        overflow:'scroll'
+                      }}>
                       <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
                         {this.getVenueInfo(ticket.venueId)}
                         <div class="col-sm-9"><label>Ticket Information:</label>
@@ -342,6 +348,7 @@ export class PurchaseTickets extends Component {
                           </div>
                         </div>
                       </form>
+                      </Element>
                     )}
                   </Popup></td>
                 </tr>
