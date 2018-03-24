@@ -2,6 +2,8 @@
 import axios from 'axios';
 import { Button } from 'reactstrap';
 import { FormattedDate, FormattedRelative } from 'react-intl';
+import { PurchaseTickets } from './PurchaseTickets';
+import { Route } from 'react-router-dom';
 
 
 export class Events extends Component {
@@ -53,6 +55,17 @@ export class Events extends Component {
 
     render() {
 
+        const RouteButton = () => (
+            <Route render={({ history }) => (
+                <Button
+                    color='primary'
+                    onClick={() => { history.push(`/PurchaseTickets`) }}
+                >
+                    Purchase
+    </Button>
+            )} />
+        )
+
 
         return (
 
@@ -94,7 +107,7 @@ export class Events extends Component {
                                         />}
 
                                     </td>
-                                    <td>{<Button color='primary'>Purchase</Button>}</td>
+                                    <td><RouteButton /></td>
 
                                 </tr>
                             )
