@@ -3,8 +3,8 @@ import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { Route } from 'react-router-dom';
-
-const KEYS_TO_FILTER = ['event.id', 'event.tourName', 'event.venueName']
+var musicPicture = require('../../src/music.jpg')
+const KEYS_TO_FILTER = [ 'event.tourName', 'event.venueName']
 
 export class MyTickets extends Component {
   displayName = MyTickets.name
@@ -53,7 +53,7 @@ export class MyTickets extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>Event Name</th>
+              <th></th>
               <th>Venue Name</th>
               <th>Tour Name</th>
               <th>Purchase Price</th>
@@ -66,7 +66,7 @@ export class MyTickets extends Component {
               return (
 
                 <tr key={ticket.id}>
-                  <td>{ticket.event.id}</td>
+                  <td><img src={musicPicture} width="25" height="25"/></td>
                   <td>{ticket.event.venueName}</td>
                   <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>

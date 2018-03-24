@@ -3,21 +3,18 @@ import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import Popup from 'reactjs-popup';
-import CreditCardInput from 'react-credit-card-input';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-import { Route } from 'react-router-dom';
 import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
-  formatFormData,
 } from './utils';
+import { withAlert } from 'react-alert';
+import { withRouter } from 'react-router-dom';
+var musicPicture = require('../../src/music.jpg')
+const KEYS_TO_FILTER = ['tourName', 'venueName', 'eventStart']
 
-
-
-
-const KEYS_TO_FILTER = ['id', 'tourName', 'venueName']
 
 export class PurchaseTickets extends Component {
   displayName = PurchaseTickets.name
@@ -37,24 +34,24 @@ export class PurchaseTickets extends Component {
         issuer: '',
         focused: '',
         formData: null,
+        send: false,
+
       };
     this.getTicketInfo = this.getTicketInfo.bind(this);
     this.getTicketInfo();
     this.searchUpdated = this.searchUpdated.bind(this)
     this.getVenueInfo = this.getVenueInfo.bind(this);
     this.purchaseTicket = this.purchaseTicket.bind(this);
+    this.isValidform = this.isValidform.bind(this);
   }
-
 
   getTicketInfo() {
     axios.get('/api/events')
       .then(response => {
         const data = response.data;
-        console.log(data);
         this.setState({ tickets: data });
       })
   }
-
 
   getVenueInfo(venueId) {
     axios.get('/api/venues/' + venueId)
@@ -71,12 +68,24 @@ export class PurchaseTickets extends Component {
       })
   }
 
-  purchaseTicket(eventId){
+
+  purchaseTicket(eventId) {
     axios.post('/api/tickets/purchase/' + eventId)
-    .then(response => {
-      alert('Success!');
-    })
-  }
+      .then(response => {
+        console.log(response)
+        this.setState({
+          send: false,
+          formData: null,
+        })      
+      }
+      )
+      .then(
+        alert("Congrats on the Ticket Purchase! Enjoy the show!"),
+        window.location.reload(),
+        this.props.history.push('/mytickets'),
+        
+      )}
+    
 
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
@@ -104,7 +113,6 @@ export class PurchaseTickets extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { issuer } = this.state;
     const formData = [...e.target.elements]
       .filter(d => d.name)
       .reduce((acc, d) => {
@@ -112,26 +120,14 @@ export class PurchaseTickets extends Component {
         return acc;
       }, {});
 
-    this.setState({ formData });
-    this.form.reset();
+    this.setState({ formData: formData});
+    this.isValidform();
   };
-
-
 
   render() {
     const { tickets, venues, venuesCity, venueAdd, venuesState, venueZip,
-      name, number, expiry, cvc, focused, issuer, formData } = this.state;
+      name, number, expiry, cvc, focused, issuer} = this.state;
     const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
-    const RouteButton = () => (
-      <Route render={({ history }) => (
-        <Button
-          color='primary'
-          onClick={() => { history.push('/') }}
-        >
-          Purchase
-    </Button>
-      )} />
-    )
     return (
       <div>
         <h1>Purchase Tickets</h1>
@@ -140,7 +136,7 @@ export class PurchaseTickets extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>Event Name</th>
+              <th></th>
               <th>Venue Name</th>
               <th>Tour Name</th>
               <th>Purchase Price</th>
@@ -153,7 +149,7 @@ export class PurchaseTickets extends Component {
               return (
 
                 <tr key={ticket.id}>
-                  <td>{ticket.id}</td>
+                  <td><img src={musicPicture} width="25" height="25" /></td>
                   <td>{ticket.venueName}</td>
                   <td>{ticket.tourName}</td>
                   <td>{ticket.ticketPrice}</td>
@@ -217,7 +213,7 @@ export class PurchaseTickets extends Component {
                             </div>
                             <div class="form-group text-left">
                               <label for="billingState">State</label>
-                              <select  required id="dropdown" class="form-control">
+                              <select required id="dropdown" class="form-control">
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AZ">Arizona</option>
@@ -286,58 +282,61 @@ export class PurchaseTickets extends Component {
                                   callback={this.handleCallback}
                                 />
                                 <div className="col-6"><label>Name</label>
-                                    <input
-                                      type="text"
-                                      name="name"
-                                      className="form-control"
-                                      placeholder="Name"
-                                      required
-                                      onChange={this.handleInputChange}
-                                      onFocus={this.handleInputFocus}
-                                    />
-                                  </div>
-                                  <div className="col-6"><label>Card Number</label>
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    className="form-control"
+                                    placeholder="Name"
+                                    pattern="[\w| ]{16,22}"
+                                    required
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                  />
+                                </div>
+                                <div className="col-6"><label>Card Number</label>
+                                  <input
+                                    type="tel"
+                                    name="number"
+                                    className="form-control"
+                                    placeholder="Card Number"
+                                    pattern="[\d| ]{16,22}"
+                                    required
+                                    acceptedCards={['visa', 'mastercard','americanexpress']}
+                                    onChange={this.handleInputChange}
+                                    onFocus={this.handleInputFocus}
+                                  />
+                                </div>
+                                <div className="row">
+                                  <div className="col-sm-3"><label>Exp</label>
                                     <input
                                       type="tel"
-                                      name="number"
+                                      name="expiry"
                                       className="form-control"
-                                      placeholder="Card Number"
-                                      pattern="[\d| ]{16,22}"
+                                      placeholder="Valid Thru"
+                                      pattern="\d\d/\d\d"
                                       required
                                       onChange={this.handleInputChange}
                                       onFocus={this.handleInputFocus}
                                     />
                                   </div>
-                                  <div className="row">
-                                    <div className="col-sm-3"><label>Exp</label>
-                                      <input
-                                        type="tel"
-                                        name="expiry"
-                                        className="form-control"
-                                        placeholder="Valid Thru"
-                                        pattern="\d\d/\d\d"
-                                        required
-                                        onChange={this.handleInputChange}
-                                        onFocus={this.handleInputFocus}
-                                      />
-                                    </div>
-                                    <div className="col-sm-3"><label> CVC </label>
-                                      <input
-                                        type="tel"
-                                        name="cvc"
-                                        className="form-control"
-                                        placeholder="CVC"
-                                        pattern="\d{3,4}"
-                                        required
-                                        onChange={this.handleInputChange}
-                                        onFocus={this.handleInputFocus}
-                                      />
-                                    </div>
-                                    </div>
-                                  <input type="hidden" name="issuer" value={issuer} />
-                                  <div className="form-actions">
-                                  <Button color="primary">PAY</Button>
+                                  <div className="col-sm-3"><label> CVC </label>
+                                    <input
+                                      type="tel"
+                                      name="cvc"
+                                      className="form-control"
+                                      placeholder="CVC"
+                                      pattern="\d{3,4}"
+                                      required
+                                      onChange={this.handleInputChange}
+                                      onFocus={this.handleInputFocus}
+                                    />
                                   </div>
+                                </div>
+                                <input type="hidden" name="issuer" value={issuer} />
+                                <div className="form-actions">
+                                {this.state.send ? <Button color="primary" size='sm' onClick={()=>{this.purchaseTicket(ticket.id)}}>PAY</Button> :
+                                 <Button color='primary' size= 'sm' disabled={this.isValidform()}>PAY</Button>}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -354,6 +353,15 @@ export class PurchaseTickets extends Component {
       </div>
     );
   }
+
+isValidform(){
+  if (this.state.formData != null){
+   this.setState({
+     send: true
+   })
+  }
+}
+
   searchUpdated(term) {
     this.setState({ searchTerm: term })
   }
