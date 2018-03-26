@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
+import { FormattedDate, FormattedRelative } from 'react-intl';
 import Popup from 'reactjs-popup';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -10,9 +11,8 @@ import {
   formatCVC,
   formatExpirationDate,
 } from './utils';
-import { withAlert } from 'react-alert';
 import { withRouter } from 'react-router-dom';
-import { Link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 var musicPicture = require('../../src/music.jpg')
 const KEYS_TO_FILTER = ['tourName', 'venueName', 'eventStart']
 
@@ -77,16 +77,18 @@ export class PurchaseTickets extends Component {
         this.setState({
           send: false,
           formData: null,
-        })      
+        })
       }
       )
       .then(
-        alert("Congrats on the Ticket Purchase! Enjoy the show!"),
-        window.location.reload(),
-        this.props.history.push('/mytickets'),
-        
-      )}
-    
+      alert("Congrats on the Ticket Purchase! Enjoy the show!"),
+      this.props.history.push('/mytickets'),
+      window.location.reload(),
+      
+
+    )
+  }
+
 
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
@@ -121,13 +123,13 @@ export class PurchaseTickets extends Component {
         return acc;
       }, {});
 
-    this.setState({ formData: formData});
+    this.setState({ formData: formData });
     this.isValidform();
   };
 
   render() {
     const { tickets, venues, venuesCity, venueAdd, venuesState, venueZip,
-      name, number, expiry, cvc, focused, issuer} = this.state;
+      name, number, expiry, cvc, focused, issuer } = this.state;
     const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
     return (
       <div>
@@ -147,6 +149,8 @@ export class PurchaseTickets extends Component {
           </thead>
           <tbody>
             {filterTickets.map(ticket => {
+              var newDate = Date.parse(ticket.eventStart);
+              var parsed = new Date(newDate);
               return (
 
                 <tr key={ticket.id}>
@@ -154,200 +158,209 @@ export class PurchaseTickets extends Component {
                   <td>{ticket.venueName}</td>
                   <td>{ticket.tourName}</td>
                   <td>{ticket.ticketPrice}</td>
-                  <td>{ticket.eventStart.substring(5, 7)}{"/"}{ticket.eventStart.substring(8, 10)}{"/"}{ticket.eventStart.substring(0, 4)}{"  "}{ticket.eventStart.substring(21, 25)}{" PM"}</td>
-                  <td><Popup trigger={<Button color='primary' type='submit' active>Purchase Ticket</Button>}
+                  <td>{
+                    <FormattedDate value={parsed}
+                      month="numeric"
+                      day="numeric"
+                      year="numeric"
+                      hour="numeric"
+                      minute="numeric"
+
+
+                    />}</td>
+                  <td><Popup trigger={<Button color='success' type='submit' active>Purchase Ticket</Button>}
                     modal
                     lockScroll={false}
                     closeOnDocumentClick>
                     {close => (
-                       <Element id="containerElement" style={{
+                      <Element id="containerElement" style={{
                         position: 'relative',
-                        height:'600px',
-                        overflow:'scroll'
+                        height: '600px',
+                        overflow: 'scroll'
                       }}>
-                      <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
-                        {this.getVenueInfo(ticket.venueId)}
-                        <div class="col-sm-9"><label>Ticket Information:</label>
-                          <div class="form-group text-left">
-                            <label class="col-sm-3">
-                              Ticket:
+                        <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
+                          {this.getVenueInfo(ticket.venueId)}
+                          <div class="col-sm-9"><label>Ticket Information:</label>
+                            <div class="form-group text-left">
+                              <label class="col-sm-3">
+                                Ticket:
                            </label>
-                            <label class="col-sm-9">
-                              <Popup trigger={<Button color='primary' size="sm">
-                                {ticket.tourName} at  {ticket.venueName}
-                              </Button>}>
-                                <div> Address: {venueAdd}{"  "}{venuesCity},{venuesState}{"  "}{venueZip}</div>
-                                <div> Capacity: {venues.capacity} </div>
-                                <div> Description: {venues.description}</div>
-                              </Popup>
+                              <label class="col-sm-9">
+                                <Popup trigger={<Button color='success' size="sm">
+                                  {ticket.tourName} at  {ticket.venueName}
+                                </Button>}>
+                                  <div> Address: {venueAdd}{"  "}{venuesCity},{venuesState}{"  "}{venueZip}</div>
+                                  <div> Capacity: {venues.capacity} </div>
+                                  <div> Description: {venues.description}</div>
+                                </Popup>
+                              </label>
+                            </div>
+                            <div class="form-group text-left">
+                              <label class="col-sm-3">
+                                Subtotal:
                             </label>
-                          </div>
-                          <div class="form-group text-left">
-                            <label class="col-sm-3">
-                              Subtotal:
+                              <label class="col-sm-9">
+                                $ {ticket.ticketPrice}
+                              </label>
+                            </div>
+                            <div class="form-group text-left">
+                              <label class="col-sm-3">
+                                Tax:
                             </label>
-                            <label class="col-sm-9">
-                              $ {ticket.ticketPrice}
+                              <label class="col-sm-9">
+                                $ {(.0825 * ticket.ticketPrice).toFixed(2)}
+                              </label>
+                            </div>
+                            <div class="form-group text-left">
+                              <label class="col-sm-3">
+                                Total:
                             </label>
-                          </div>
-                          <div class="form-group text-left">
-                            <label class="col-sm-3">
-                              Tax:
-                            </label>
-                            <label class="col-sm-9">
-                              $ {(.0825 * ticket.ticketPrice).toFixed(2)}
-                            </label>
-                          </div>
-                          <div class="form-group text-left">
-                            <label class="col-sm-3">
-                              Total:
-                            </label>
-                            <label class="col-sm-9">
-                              $ {(ticket.ticketPrice + (.0825 * ticket.ticketPrice)).toFixed(2)}
-                            </label>
-                          </div>
+                              <label class="col-sm-9">
+                                $ {(ticket.ticketPrice + (.0825 * ticket.ticketPrice)).toFixed(2)}
+                              </label>
+                            </div>
 
-                          <div><label>Billing Information:</label>
-                            <div class="form-group text-left">
-                              <label>Address</label>
-                              <input type="text" id="purchaseFormAddressLine1" placeholder="Address Line 1" class="form-control errorInputOutline" required />
-                              <input type="text" id="purchaseFormAddressLine2" placeholder="Address Line 2" class="form-control validInputOutline" />
-                            </div>
-                            <div class="form-group text-left">
-                              <label for="billingCity">City</label>
-                              <input type="text" id="billingCity" placeholder="City" class="form-control errorInputOutline" required />
-                            </div>
-                            <div class="form-group text-left">
-                              <label for="billingState">State</label>
-                              <select required id="dropdown" class="form-control">
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="DC">District Of Columbia</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="ID">Idaho</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IN">Indiana</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NV">Nevada</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="NY">New York</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="OH">Ohio</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="OR">Oregon</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="TX">Texas</option>
-                                <option value="UT">Utah</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WA">Washington</option>
-                                <option value="WV">West Virginia</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="WY">Wyoming</option>
-                              </select>
-                            </div>
-                            <div class="form-group text-left">
-                              <label for="billingZipCode">ZipCode</label>
-                              <input required type="text" id="billingZipCode" placeholder="70706" maxLength="5" class="form-control errorInputOutline" />
-                            </div>
-                            <div key="Payment">
-                              <div className="App-payment">
-                                <Cards
-                                  number={number}
-                                  name={name}
-                                  expiry={expiry}
-                                  cvc={cvc}
-                                  focused={focused}
-                                  callback={this.handleCallback}
-                                />
-                                <div className="col-6"><label>Name</label>
-                                  <input
-                                    type="text"
-                                    name="name"
-                                    className="form-control"
-                                    placeholder="Name"
-                                    pattern="[\w| ]{16,22}"
-                                    required
-                                    onChange={this.handleInputChange}
-                                    onFocus={this.handleInputFocus}
+                            <div><label>Billing Information:</label>
+                              <div class="form-group text-left">
+                                <label>Address</label>
+                                <input type="text" id="purchaseFormAddressLine1" placeholder="Address Line 1" class="form-control errorInputOutline" required />
+                                <input type="text" id="purchaseFormAddressLine2" placeholder="Address Line 2" class="form-control validInputOutline" />
+                              </div>
+                              <div class="form-group text-left">
+                                <label for="billingCity">City</label>
+                                <input type="text" id="billingCity" placeholder="City" class="form-control errorInputOutline" required />
+                              </div>
+                              <div class="form-group text-left">
+                                <label for="billingState">State</label>
+                                <select required id="dropdown" class="form-control">
+                                  <option value="AL">Alabama</option>
+                                  <option value="AK">Alaska</option>
+                                  <option value="AZ">Arizona</option>
+                                  <option value="AR">Arkansas</option>
+                                  <option value="CA">California</option>
+                                  <option value="CO">Colorado</option>
+                                  <option value="CT">Connecticut</option>
+                                  <option value="DE">Delaware</option>
+                                  <option value="DC">District Of Columbia</option>
+                                  <option value="FL">Florida</option>
+                                  <option value="GA">Georgia</option>
+                                  <option value="HI">Hawaii</option>
+                                  <option value="ID">Idaho</option>
+                                  <option value="IL">Illinois</option>
+                                  <option value="IN">Indiana</option>
+                                  <option value="IA">Iowa</option>
+                                  <option value="KS">Kansas</option>
+                                  <option value="KY">Kentucky</option>
+                                  <option value="LA">Louisiana</option>
+                                  <option value="ME">Maine</option>
+                                  <option value="MD">Maryland</option>
+                                  <option value="MA">Massachusetts</option>
+                                  <option value="MI">Michigan</option>
+                                  <option value="MN">Minnesota</option>
+                                  <option value="MS">Mississippi</option>
+                                  <option value="MO">Missouri</option>
+                                  <option value="MT">Montana</option>
+                                  <option value="NE">Nebraska</option>
+                                  <option value="NV">Nevada</option>
+                                  <option value="NH">New Hampshire</option>
+                                  <option value="NJ">New Jersey</option>
+                                  <option value="NM">New Mexico</option>
+                                  <option value="NY">New York</option>
+                                  <option value="NC">North Carolina</option>
+                                  <option value="ND">North Dakota</option>
+                                  <option value="OH">Ohio</option>
+                                  <option value="OK">Oklahoma</option>
+                                  <option value="OR">Oregon</option>
+                                  <option value="PA">Pennsylvania</option>
+                                  <option value="RI">Rhode Island</option>
+                                  <option value="SC">South Carolina</option>
+                                  <option value="SD">South Dakota</option>
+                                  <option value="TN">Tennessee</option>
+                                  <option value="TX">Texas</option>
+                                  <option value="UT">Utah</option>
+                                  <option value="VT">Vermont</option>
+                                  <option value="VA">Virginia</option>
+                                  <option value="WA">Washington</option>
+                                  <option value="WV">West Virginia</option>
+                                  <option value="WI">Wisconsin</option>
+                                  <option value="WY">Wyoming</option>
+                                </select>
+                              </div>
+                              <div class="form-group text-left">
+                                <label for="billingZipCode">ZipCode</label>
+                                <input required type="text" id="billingZipCode" placeholder="70706" maxLength="5" class="form-control errorInputOutline" />
+                              </div>
+                              <div key="Payment">
+                                <div className="App-payment">
+                                  <Cards
+                                    number={number}
+                                    name={name}
+                                    expiry={expiry}
+                                    cvc={cvc}
+                                    focused={focused}
+                                    callback={this.handleCallback}
                                   />
-                                </div>
-                                <div className="col-6"><label>Card Number</label>
-                                  <input
-                                    type="tel"
-                                    name="number"
-                                    className="form-control"
-                                    placeholder="Card Number"
-                                    pattern="[\d| ]{16,22}"
-                                    required
-                                    acceptedCards={['visa', 'mastercard','americanexpress']}
-                                    onChange={this.handleInputChange}
-                                    onFocus={this.handleInputFocus}
-                                  />
-                                </div>
-                                <div className="row">
-                                  <div className="col-sm-3"><label>Exp</label>
+                                  <div className="col-6"><label>Name</label>
                                     <input
-                                      type="tel"
-                                      name="expiry"
+                                      type="text"
+                                      name="name"
                                       className="form-control"
-                                      placeholder="Valid Thru"
-                                      pattern="\d\d/\d\d"
+                                      placeholder="Name"
+                                      pattern="[A-Z][\w]* [A-Z][\w]*"
                                       required
                                       onChange={this.handleInputChange}
                                       onFocus={this.handleInputFocus}
                                     />
                                   </div>
-                                  <div className="col-sm-3"><label> CVC </label>
+                                  <div className="col-6"><label>Card Number</label>
                                     <input
                                       type="tel"
-                                      name="cvc"
+                                      name="number"
                                       className="form-control"
-                                      placeholder="CVC"
-                                      pattern="\d{3,4}"
+                                      placeholder="Card Number"
+                                      pattern="[\d| ]{16,22}"
                                       required
+                                      acceptedCards={['visa', 'mastercard', 'americanexpress']}
                                       onChange={this.handleInputChange}
                                       onFocus={this.handleInputFocus}
                                     />
                                   </div>
-                                </div>
-                                <input type="hidden" name="issuer" value={issuer} />
-                                <div className="form-actions">
-                                {this.state.send ? <Button color="primary" size='sm' onClick={()=>{this.purchaseTicket(ticket.id)}}>PAY</Button> :
-                                 <Button color='primary' size= 'sm' disabled={this.isValidform()}>PAY</Button>}
+                                  <div className="row">
+                                    <div className="col-sm-3"><label>Exp</label>
+                                      <input
+                                        type="tel"
+                                        name="expiry"
+                                        className="form-control"
+                                        placeholder="Valid Thru"
+                                        pattern="\d\d/\d\d"
+                                        required
+                                        onChange={this.handleInputChange}
+                                        onFocus={this.handleInputFocus}
+                                      />
+                                    </div>
+                                    <div className="col-sm-3"><label> CVC </label>
+                                      <input
+                                        type="tel"
+                                        name="cvc"
+                                        className="form-control"
+                                        placeholder="CVC"
+                                        pattern="\d{3,4}"
+                                        required
+                                        onChange={this.handleInputChange}
+                                        onFocus={this.handleInputFocus}
+                                      />
+                                    </div>
+                                  </div>
+                                  <input type="hidden" name="issuer" value={issuer} />
+                                  <div className="form-actions">
+                                    {this.state.send ? <Button color="success" size='sm' onClick={() => { this.purchaseTicket(ticket.id) }}>PAY</Button> :
+                                      <Button color='success' size='sm' disabled={this.isValidform()}>PAY</Button>}
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
                       </Element>
                     )}
                   </Popup></td>
@@ -361,13 +374,13 @@ export class PurchaseTickets extends Component {
     );
   }
 
-isValidform(){
-  if (this.state.formData != null){
-   this.setState({
-     send: true
-   })
+  isValidform() {
+    if (this.state.formData != null) {
+      this.setState({
+        send: true
+      })
+    }
   }
-}
 
   searchUpdated(term) {
     this.setState({ searchTerm: term })

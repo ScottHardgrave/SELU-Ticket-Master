@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardColumns, CardDeck, CardBody, CardTitle, CardImg, Button, CardSubtitle, CardText } from 'reactstrap';
 import { Route } from 'react-router-dom';
-var ticketsrus = require('../../src/ticketsrus.gif')
+var ticketsrus = require('../../src/ticketsrus.gif');
+var logo = require('../../src/ticketslogo.png');
 
 export class Home extends Component {
   displayName = Home.name
@@ -11,7 +12,7 @@ export class Home extends Component {
       const RouteButton1 = () => (
           <Route render={({ history }) => (
               <Button
-                  color='primary'
+                  color='success'
                   onClick={() => { history.push(`/Venues`) }}
               >
                   Venues
@@ -23,7 +24,7 @@ export class Home extends Component {
       const RouteButton2 = () => (
           <Route render={({ history }) => (
               <Button
-                  color='primary'
+                  color='success'
                   onClick={() => { history.push(`/Venues`) }}
               >
                   Tours
@@ -35,7 +36,7 @@ export class Home extends Component {
       const RouteButton3 = () => (
           <Route render={({ history }) => (
               <Button
-                  color='primary'
+                  color='success'
                   onClick={() => { history.push(`/PurchaseTickets`) }}
               >
                   Buy Tickets
@@ -45,10 +46,10 @@ export class Home extends Component {
 
     return (
       <div>
-        <h1 align="center">Welcome to Tickets R' Us!</h1>
-        <img src={ticketsrus} width="1375px" height="300px"/>
+        <h1 align="center"><img src={logo} height='200px' width='800px'/></h1>
+        <img src={ticketsrus} width="1100px" height="300px" align="center"/>
 
-        <h3>Toys R' Us has decided to rebrand as a Music App called Tickets R' Us! Feel free to search through our music options and have fun! </h3>
+        <h3>Toys R' Us has decided to rebrand as a Music App called Tickets R' Us SELU! Feel free to search through our music options and have fun! </h3>
       <br/>
       <br/>
       <br/>

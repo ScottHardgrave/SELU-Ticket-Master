@@ -26,7 +26,7 @@ export class Venues extends Component {
         const RouteButton = ({ venueId }) => (
             <Route render={({ history }) => (
                 <Button
-                    color='primary'
+                    color='success'
                     onClick={() => { history.push(`/Venue/${venueId}`) }}
                 >
                     Events

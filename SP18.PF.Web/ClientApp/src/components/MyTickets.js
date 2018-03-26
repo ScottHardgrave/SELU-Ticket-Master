@@ -12,7 +12,7 @@ export class MyTickets extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { tickets: [], loading: true, searchTerm: '', userEmail: [] };
+    this.state = { tickets: [], loading: true, searchTerm: '', userEmail: [], guest: false, Guest:'Guest' };
     this.getTicketInfo = this.getTicketInfo.bind(this);
     this.getTicketInfo();
     this.searchUpdated = this.searchUpdated.bind(this)
@@ -25,18 +25,18 @@ export class MyTickets extends Component {
         const data = response.data;
         const user = response.data[0].user.email;
         console.log(data);
-        this.setState({ tickets: data, userEmail: user });
+        this.setState({ tickets: data, userEmail: user, guest: true });
       })
   }
 
 
   render() {
-    const { tickets, userEmail } = this.state;
+    const { tickets, userEmail, Guest } = this.state;
     const filterTickets = tickets.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTER))
     const RouteButton = () => (
       <Route render={({ history }) => (
         <Button
-          color='primary'
+          color='success'
           onClick={() => { history.push('/purchasetickets') }}
         >
           Purchase a New Ticket
@@ -47,7 +47,7 @@ export class MyTickets extends Component {
 
       <div>
         <h1>My Tickets</h1>
-        <p>These are the tickets that {userEmail} has purchased.</p>
+        <p>Logged in as :{this.state.guest ? userEmail : Guest }</p>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
         <RouteButton />
         <table className='table'>
