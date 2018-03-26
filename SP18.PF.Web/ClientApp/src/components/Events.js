@@ -143,7 +143,7 @@ export class Events extends Component {
         return (
 
             <div>
-                <h1>{this.state.venue.name} events</h1>
+                <h1>{this.state.venue.name}</h1>
 
 
 
