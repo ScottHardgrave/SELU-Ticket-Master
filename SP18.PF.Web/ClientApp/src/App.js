@@ -9,6 +9,7 @@ import {PurchaseTickets} from './components/PurchaseTickets';
 import { Venues } from './components/Venues';
 import { Events } from './components/Events';
 import { Venue } from './components/Venue';
+import {MyAccount} from './components/MyAccount';
 
 
 
@@ -23,6 +24,7 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <Route path='/mytickets' component={MyTickets}/>
+        <Route path='/myaccount' component={MyAccount}/>
         <Route path='/purchasetickets' component={PurchaseTickets}/>
         <Route path='/Venues' component={Venues} />
         {/*<Route path='/Events' component={Events} />*/}

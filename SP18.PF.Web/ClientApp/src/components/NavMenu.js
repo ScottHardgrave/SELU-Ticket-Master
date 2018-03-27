@@ -35,7 +35,7 @@ export class NavMenu extends Component {
       <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}><img src={logo} height='70px' width='335px' position='relative'/></Link>
+            <Link to={'/'}><img src={logo} height='30px' width='75px' align="center"/></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -61,9 +61,17 @@ export class NavMenu extends Component {
                 <NavItem>
                   <Glyphicon glyph='music' /> My Tickets
               </NavItem>
-              </LinkContainer> :
+              </LinkContainer>
+               :
               <div> </div>
             }
+            {this.state.logged ?
+               <LinkContainer to={'/myaccount'}  >
+               <NavItem>
+                 <Glyphicon glyph='user' /> My Account
+             </NavItem>
+             </LinkContainer> :
+            <div> </div> }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

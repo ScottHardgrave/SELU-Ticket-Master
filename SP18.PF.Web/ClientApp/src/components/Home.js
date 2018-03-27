@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardColumns, CardDeck, CardBody, CardTitle, CardImg, Button, CardSubtitle, CardText } from 'reactstrap';
 import { Route } from 'react-router-dom';
 var ticketsrus = require('../../src/ticketsrus.gif');
-var logo = require('../../src/ticketslogo.png');
+var logo = require('../../src/ticketslogo.jpg');
+var background = require('../../src/background.jpg');
 
 export class Home extends Component {
   displayName = Home.name
@@ -46,6 +47,7 @@ export class Home extends Component {
 
     return (
       <div>
+      <div>
         <h1 align="center"><img src={logo} height='200px' width='800px'/></h1>
         <img src={ticketsrus} width="1100px" height="300px" align="center"/>
 
@@ -83,6 +85,7 @@ export class Home extends Component {
         </CardBody>
       </Card>
       </div>
+     </div>
      </div>
     );
   }

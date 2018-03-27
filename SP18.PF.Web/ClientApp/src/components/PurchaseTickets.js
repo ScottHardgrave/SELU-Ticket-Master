@@ -165,8 +165,6 @@ export class PurchaseTickets extends Component {
                       year="numeric"
                       hour="numeric"
                       minute="numeric"
-
-
                     />}</td>
                   <td><Popup trigger={<Button color='success' type='submit' active>Purchase Ticket</Button>}
                     modal

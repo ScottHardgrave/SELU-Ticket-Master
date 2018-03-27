@@ -3,7 +3,8 @@ import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { Route } from 'react-router-dom';
-var musicPicture = require('../../src/music.jpg')
+import { FormattedDate, FormattedRelative } from 'react-intl';
+var musicPicture = require('../../src/music.jpg');
 const KEYS_TO_FILTER = [ 'event.tourName', 'event.venueName']
 
 export class MyTickets extends Component {
@@ -44,13 +45,12 @@ export class MyTickets extends Component {
       )} />
     )
     return (
-
-      <div>
+      <div >
         <h1>My Tickets</h1>
         <p>Logged in as :{this.state.guest ? userEmail : Guest }</p>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
         <RouteButton />
-        <table className='table'>
+        <table className='table' >
           <thead>
             <tr>
               <th></th>
@@ -63,6 +63,8 @@ export class MyTickets extends Component {
           </thead>
           <tbody>
             {filterTickets.map(ticket => {
+               var newDate = Date.parse(ticket.event.eventStart);
+               var parsed = new Date(newDate);
               return (
 
                 <tr key={ticket.id}>
@@ -70,14 +72,20 @@ export class MyTickets extends Component {
                   <td>{ticket.event.venueName}</td>
                   <td>{ticket.event.tourName}</td>
                   <td>{ticket.purchasePrice}</td>
-                  <td>{ticket.event.eventStart.substring(5, 7)}{"/"}{ticket.event.eventStart.substring(8, 10)}{"/"}{ticket.event.eventStart.substring(0, 4)}{"  "}{ticket.event.eventStart.substring(21, 25)}{" PM"}</td>
+                  <td> <FormattedDate value={parsed}
+                      month="numeric"
+                      day="numeric"
+                      year="numeric"
+                      hour="numeric"
+                      minute="numeric"
+                    /></td>
                 </tr>
               )
 
             })}
           </tbody>
         </table>
-      </div>
+        </div>
     );
   }
 
