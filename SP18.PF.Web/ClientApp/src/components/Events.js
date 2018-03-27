@@ -33,10 +33,13 @@ export class Events extends Component {
             focused: '',
             formData: null,
             send: false,
+            logged: false,
         };
         this.getEventInfo = this.getEventInfo.bind(this);
         this.getVenueInfo = this.getVenueInfo.bind(this);
         this.isValidform = this.isValidform.bind(this);
+        this.getUserInfo = this.getUserInfo.bind(this);
+        this.getUserInfo();
     }
 
     componentDidMount() {
@@ -61,6 +64,21 @@ export class Events extends Component {
                 this.setState({ events: data });
             })
     }
+
+        
+  getUserInfo() {
+    axios.get('/api/users/me')
+      .then(response => {
+        const data = response.data;
+        const length = response.data.length;
+        console.log(length);
+        console.log(data);
+        if (length != 0) {
+
+          this.setState({ logged: true });
+        }
+      })
+  }
 
     getVenueInfo() {
         console.log("Props for events.")
@@ -183,7 +201,7 @@ export class Events extends Component {
                                         />}
 
                                     </td>
-                                    <td><Popup trigger={<Button color='success' type='submit' active>Purchase Ticket</Button>}
+                                    <td><Popup trigger={this.state.logged? <Button color='success' type='submit' active>Purchase Ticket</Button>: <div></div>}
                                         modal
                                         lockScroll={false}
                                         closeOnDocumentClick>

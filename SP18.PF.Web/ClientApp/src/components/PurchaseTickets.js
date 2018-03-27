@@ -36,6 +36,8 @@ export class PurchaseTickets extends Component {
         focused: '',
         formData: null,
         send: false,
+        logged: false,
+        userEmail: []
 
       };
     this.getTicketInfo = this.getTicketInfo.bind(this);
@@ -44,6 +46,8 @@ export class PurchaseTickets extends Component {
     this.getVenueInfo = this.getVenueInfo.bind(this);
     this.purchaseTicket = this.purchaseTicket.bind(this);
     this.isValidform = this.isValidform.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.getUserInfo();
   }
 
   getTicketInfo() {
@@ -66,6 +70,21 @@ export class PurchaseTickets extends Component {
           venues: venueData, venuesCity: city, venueZip: zip,
           venuesState: state, venueAdd: add
         });
+      })
+  }
+
+    
+  getUserInfo() {
+    axios.get('/api/users/me')
+      .then(response => {
+        const data = response.data;
+        const length = response.data.length;
+        console.log(length);
+        console.log(data);
+        if (length != 0) {
+
+          this.setState({ logged: true });
+        }
       })
   }
 
@@ -166,7 +185,7 @@ export class PurchaseTickets extends Component {
                       hour="numeric"
                       minute="numeric"
                     />}</td>
-                  <td><Popup trigger={<Button color='success' type='submit' active>Purchase Ticket</Button>}
+                  <td><Popup trigger={this.state.logged? <Button color='success' type='submit' active>Purchase Ticket</Button>: <div></div>}
                     modal
                     lockScroll={false}
                     closeOnDocumentClick>
