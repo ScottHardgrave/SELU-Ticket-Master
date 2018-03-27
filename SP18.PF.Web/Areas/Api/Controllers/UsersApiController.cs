@@ -38,6 +38,16 @@ namespace SP18.PF.Web.Areas.Api.Controllers
             return Ok(user);
         }
 
+        [HttpGet("me")]
+        [ProducesResponseType(typeof(UserDtoProfile[]), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public async Task<IActionResult> GetMyTickets()
+        {
+            var user = User;
+            var result = await userService.GetUser(user);
+            return Ok(result);
+        }
+
         [HttpGet("logout")]
         [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK)]

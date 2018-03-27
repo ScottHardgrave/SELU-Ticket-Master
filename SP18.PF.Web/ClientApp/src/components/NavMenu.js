@@ -11,21 +11,23 @@ export class NavMenu extends Component {
   displayName = NavMenu.name
   constructor(props) {
     super(props);
-    this.state = { tickets: [], loading: true, searchTerm: '', userEmail: [], logged: false };
-    this.getTicketInfo = this.getTicketInfo.bind(this);
-    this.getTicketInfo();
+    this.state = { user: [], loading: true, searchTerm: '', userEmail: [], logged: false };
+    this.getUserInfo = this.getUserInfo.bind(this);
+    this.getUserInfo();
 
   }
 
 
-  getTicketInfo() {
-    axios.get('/api/tickets')
+  getUserInfo() {
+    axios.get('/api/users/me')
       .then(response => {
         const data = response.data;
-        const user = response.data[0].user.email;
-        if (user != null) {
+        const length = response.data.length;
+        console.log(length);
+        console.log(data);
+        if (length != 0) {
 
-          this.setState({ tickets: data, userEmail: user, logged: true });
+          this.setState({ user: data, logged: true });
         }
       })
   }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -99,6 +101,18 @@ namespace SP18.PF.Web.Services
             {
                 Data = result
             };
+        }
+
+        public Task<UserDtoProfile[]> GetUser(ClaimsPrincipal user, Expression<Func<User, bool>> filter = null)
+        {
+            filter = filter ?? (x => true);
+            var userEmail = user?.Identity?.Name;
+            var users = dbContext.Set<User>()
+                .Where(x => x.Email == userEmail)
+                .Where(filter)
+                .ProjectTo<UserDtoProfile>(mapper.ConfigurationProvider)
+                .ToArrayAsync();
+            return users;
         }
     }
 }
