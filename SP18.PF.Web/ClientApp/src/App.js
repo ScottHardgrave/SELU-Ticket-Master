@@ -9,7 +9,10 @@ import {PurchaseTickets} from './components/PurchaseTickets';
 import { Venues } from './components/Venues';
 import { Events } from './components/Events';
 import { Venue } from './components/Venue';
-import {MyAccount} from './components/MyAccount';
+import { MyAccount } from './components/MyAccount';
+import { Tour } from './components/Tour';
+import { Events2 } from './components/Events2';
+import { Tours } from './components/Tours';
 
 
 
@@ -29,6 +32,8 @@ export default class App extends Component {
         <Route path='/Venues' component={Venues} />
         {/*<Route path='/Events' component={Events} />*/}
         <Route path='/Venue/:id' component={Venue} />
+        <Route path='/Tour/:id' component={Tour} />
+        <Route path='/Tours/' component={Tours} />
       </Layout>
     );
   }

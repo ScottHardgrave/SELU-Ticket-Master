@@ -48,6 +48,7 @@
         margin: 6px;
         background-color: white;
         color: black;
+        text-emphasis-color: black;
     }
     .navbar li a {
         padding: 10px 16px;
@@ -61,9 +62,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
         color: black;
+        
     }
 
     .navbar .navbar-inverse .navbar-fixed-top{
         background-color: wheat
     }
+
+    
 }
