@@ -13,6 +13,7 @@ import {
 } from './utils';
 
 import { Link, DirectLink, Element, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+var musicPicture = require('../../src/music.jpg');
 
 
 export class Events extends Component {
@@ -150,6 +151,7 @@ export class Events extends Component {
                 <table className='table'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Venue name</th>
                             <th>Tour name</th>
                             <th>Ticket price</th>
@@ -165,6 +167,7 @@ export class Events extends Component {
                             var parsed = new Date(newDate);
                             return (
                                 <tr key={events.tourId}>
+                                <td><img src={musicPicture} width="25" height="25"/></td>
                                     <td>{events.venueName}</td>
                                     <td>{events.tourName}</td>
                                     <td>{events.ticketPrice}</td>

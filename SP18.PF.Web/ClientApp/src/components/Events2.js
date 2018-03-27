@@ -13,6 +13,7 @@ import {
 } from './utils';
 
 import { Link, DirectLink, Element, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+var musicPicture = require('../../src/music.jpg');
 
 
 export class Events2 extends Component {
@@ -154,19 +155,19 @@ export class Events2 extends Component {
 
         this.setState({ formData: formData });
         this.isValidform();
-        
+
     };
 
     render() {
-        const {  tour, venue, venuesCity, venueAdd, venuesState, venueZip,
+        const { tour, venue, venuesCity, venueAdd, venuesState, venueZip,
             name, number, expiry, cvc, focused, issuer } = this.state;
 
 
         return (
 
             <div>
-                
-                        <h1>{this.state.tour.name}</h1>
+
+                <h1>{this.state.tour.name}</h1>
 
 
 
@@ -175,6 +176,7 @@ export class Events2 extends Component {
                 <table className='table'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Venue name</th>
                             <th>Tour name</th>
                             <th>Ticket price</th>
@@ -190,6 +192,7 @@ export class Events2 extends Component {
                             var parsed = new Date(newDate);
                             return (
                                 <tr key={events.tourId}>
+                                    <td><img src={musicPicture} width="25" height="25" /></td>
                                     <td>{events.venueName}</td>
                                     <td>{events.tourName}</td>
                                     <td>{events.ticketPrice}</td>
@@ -216,7 +219,7 @@ export class Events2 extends Component {
                                                 overflow: 'scroll'
                                             }}>
                                                 <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
-                                                   {this.getVenueInfo(events.venueId)}
+                                                    {this.getVenueInfo(events.venueId)}
                                                     <div class="col-sm-9"><label>Ticket Information:</label>
                                                         <div class="form-group text-left">
                                                             <label class="col-sm-3">

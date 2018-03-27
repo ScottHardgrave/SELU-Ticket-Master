@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { Button } from 'reactstrap';
 import { Route } from 'react-router-dom';
+var musicPicture = require('../../src/music.jpg');
 
 export class Tours extends Component {
     displayName = Tours.name
@@ -42,6 +43,7 @@ export class Tours extends Component {
                 <table className='table'>
                     <thead>
                         <tr>
+                            <th> </th>
                             <th>Tour name</th>
                             <th>Description</th>
                             <th></th>
@@ -52,6 +54,7 @@ export class Tours extends Component {
                         {this.state.tours.map(tours => {
                             return (
                                 <tr key={tours.name}>
+                                <td><img src={musicPicture} width="25" height="25"/></td>
                                     <td>{tours.name}</td>
                                     <td>{tours.description}</td>
                                     <td><RouteButton tourId={tours.id} /></td>
