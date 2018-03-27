@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import axios from 'axios';
 import { userActions } from '../_actions';
-
-class RegisterPage extends React.Component {                //Maybe needs Export in front
+ 
+class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-
+ 
         this.state = {
             user: {
                 firstName: '',
@@ -17,11 +17,11 @@ class RegisterPage extends React.Component {                //Maybe needs Export
             },
             submitted: false
         };
-
+ 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+ 
     handleChange(event) {
         const { name, value } = event.target;
         const { user } = this.state;
@@ -32,10 +32,10 @@ class RegisterPage extends React.Component {                //Maybe needs Export
             }
         });
     }
-
+ 
     handleSubmit(event) {
         event.preventDefault();
-
+ 
         this.setState({ submitted: true });
         const { user } = this.state;
         const { dispatch } = this.props;
@@ -43,9 +43,9 @@ class RegisterPage extends React.Component {                //Maybe needs Export
             dispatch(userActions.register(user));
         }
     }
-
+ 
     render() {
-        const { registering } = this.props;
+        const { registering  } = this.props;
         const { user, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
@@ -91,13 +91,13 @@ class RegisterPage extends React.Component {                //Maybe needs Export
         );
     }
 }
-
+ 
 function mapStateToProps(state) {
     const { registering } = state.registration;
     return {
         registering
     };
 }
-
+ 
 const connectedRegisterPage = connect(mapStateToProps)(RegisterPage);
 export { connectedRegisterPage as RegisterPage };
