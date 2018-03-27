@@ -13,8 +13,12 @@ export class MyAccount extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true, userEmail: [], guest: false, theUser: [] };
+    this.state = { forecasts: [], loading: true, userEmail: [], guest: false, theUser: [], value:'', send: false, itsOkay: false };
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.updateInfo = this.updateInfo.bind(this);
+    this.isValidform = this.isValidform.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.getUserInfo();
   }
 
@@ -34,6 +38,35 @@ export class MyAccount extends Component {
       })
   }
 
+    updateInfo() {
+      return axios.put('/api/users/billing-info', 
+      {addressLine1: this.state.address, 
+      zipCode: this.state.zipcode, city: this.state.city,
+      state: this.state.state}
+    ).then(response => {
+          console.log(response)
+      })
+      .then(
+      alert("Updated Information! Some things may not change based on what you put in."),
+      window.location.reload(),
+      )
+
+    }
+
+  handleChange(event) {
+    const target = event.target;
+    const value =  target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    this.setState({
+      itsOkay: true
+    })
+  }
+
 
   render() {
     const { userEmail, theUser } = this.state;
@@ -45,20 +78,36 @@ export class MyAccount extends Component {
             {theUser.map(user => {
               return (
                 <tr key={user.id}>
-                  
+                  <div><h1> My Account </h1></div>
                     <Image src={logo} width='100px' height='100px' circle />
            
-                  <div><label> Email</label></div>
-                  <input type="text" id="email" placeholder={user.email} class="form-control errorInputOutline" />
+                  <div><label> </label></div>
+                  <div><h2>{user.email}</h2></div>
+                 
                   <div><label> Address </label> </div>
-                  <input type="text" id="address" placeholder={user.billingAddress.addressLine1} class="form-control errorInputOutline" />
+                  <input type="text" name="address" placeholder={user.billingAddress.addressLine1} 
+                  class="form-control errorInputOutline" 
+                  value={this.state.address} 
+                  onChange={this.handleChange}/>
                   <div><label> City</label></div>
-                  <input type="text" id="city" placeholder={user.billingAddress.city} class="form-control errorInputOutline" />
+                  <input type="text" name="city" placeholder={user.billingAddress.city} 
+                  class="form-control errorInputOutline" 
+                  value={this.state.city} 
+                  onChange={this.handleChange}/>
                   <div><label> State </label> </div>
-                  <input type="text" id="state" placeholder={user.billingAddress.state} class="form-control errorInputOutline" />
+                  <input type="text" pattern="^[A-Za-z]{2}$" maxLength="2" name="state" 
+                  placeholder={user.billingAddress.state} 
+                  class="form-control errorInputOutline" 
+                  value={this.state.state} 
+                  onChange={this.handleChange}/>
                   <div><label> Zipcode</label></div>
-                  <input type="text" id="state" placeholder={user.billingAddress.zipCode} class="form-control errorInputOutline" />
-                  <Button color='success' onClick={() => { alert('Are you sure?') }}>Update</Button>
+                  <input type="tel" maxLength="5" minLength="5" name="zipcode" 
+                  placeholder={user.billingAddress.zipCode} 
+                  class="form-control errorInputOutline"
+                  value={this.state.zipcode} 
+                  onChange={this.handleChange} />
+                  {this.state.send ? <Button color='success' onClick={() => {this.updateInfo(this.state.address) }}>Update
+                  </Button> : <Button color='success' disabled ={this.isValidform()}> Update </Button>}
                 </tr>
               )
 
@@ -69,6 +118,14 @@ export class MyAccount extends Component {
     )
 
   }
+  isValidform() {
+    if(this.state.itsOkay == true){
+      this.setState({
+        send: true
+      })
+    }
+  }
+
 
 
 }
