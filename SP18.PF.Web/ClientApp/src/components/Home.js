@@ -26,7 +26,7 @@ export class Home extends Component {
           <Route render={({ history }) => (
               <Button
                   color='success'
-                  onClick={() => { history.push(`/Venues`) }}
+                  onClick={() => { history.push(`/tours`) }}
               >
                   Tours
     </Button>

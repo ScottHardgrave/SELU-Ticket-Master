@@ -4,7 +4,9 @@ import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { Route } from 'react-router-dom';
 import { FormattedDate, FormattedRelative } from 'react-intl';
-import {Card} from 'reactstrap';
+import { Card } from 'reactstrap';
+import {Image, Col} from "react-bootstrap";
+var logo = require('../../src/music.jpg');
 
 export class MyAccount extends Component {
   displayName = MyAccount.name
@@ -36,13 +38,16 @@ export class MyAccount extends Component {
   render() {
     const { userEmail, theUser } = this.state;
     return (
-    
-    <form onSubmit={this.handleSubmit}> 
-    <Card>
+
+      <form onSubmit={this.handleSubmit}>
+        <Card>
           <div align='center'>
             {theUser.map(user => {
               return (
                 <tr key={user.id}>
+                  
+                    <Image src={logo} width='100px' height='100px' circle />
+           
                   <div><label> Email</label></div>
                   <input type="text" id="email" placeholder={user.email} class="form-control errorInputOutline" />
                   <div><label> Address </label> </div>
@@ -53,14 +58,14 @@ export class MyAccount extends Component {
                   <input type="text" id="state" placeholder={user.billingAddress.state} class="form-control errorInputOutline" />
                   <div><label> Zipcode</label></div>
                   <input type="text" id="state" placeholder={user.billingAddress.zipCode} class="form-control errorInputOutline" />
-                  <Button color='success' onClick={() =>{alert('Are you sure?')}}>Update</Button>
+                  <Button color='success' onClick={() => { alert('Are you sure?') }}>Update</Button>
                 </tr>
               )
 
             })}
           </div>
-          </Card>
-        </form>
+        </Card>
+      </form>
     )
 
   }
