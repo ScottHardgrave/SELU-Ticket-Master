@@ -86,7 +86,7 @@ export class MyTickets extends Component {
             height: '600px',
             overflow: 'scroll'
           }}>
-        <h1>My Tickets</h1>
+        <h1 align='center'>My Tickets</h1>
         <p>Logged in as: {this.state.logged ? userEmail : Guest }</p>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
         <RouteButton />

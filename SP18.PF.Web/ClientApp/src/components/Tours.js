@@ -54,7 +54,7 @@ export class Tours extends Component {
         <br />
         <div class='container-fluid'>
         <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
-                <h1>Tours</h1>
+                <h1 align='center'>Tours</h1>
                 <p>All of the Tours</p>
                 <table className='table'>
                     <thead>

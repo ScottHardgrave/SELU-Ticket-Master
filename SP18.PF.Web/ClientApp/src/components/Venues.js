@@ -53,7 +53,7 @@ export class Venues extends Component {
         <br />
         <div class='container-fluid'>
         <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
-                <h1>Venues</h1>
+                <h1 align='center'>Venues</h1>
                 <p>All of the venues</p>         
                 <table className='table'>
                     <thead>

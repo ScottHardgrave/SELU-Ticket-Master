@@ -201,7 +201,7 @@ export class Events2 extends Component {
                     <div class='container-fluid'>
                         <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
 
-                            <h1>{this.state.tour.name}</h1>
+                            <h1 align='center'>{this.state.tour.name}</h1>
 
 
 

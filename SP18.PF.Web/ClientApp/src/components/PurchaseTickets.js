@@ -170,10 +170,10 @@ export class PurchaseTickets extends Component {
         <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
                 <Element id="containerElement" style={{
                   position: 'relative',
-                  height: '800px',
+                  height: '600px',
                   overflow: 'scroll'
                 }}>
-                  <h1>Purchase Tickets</h1>
+                  <h1 align='center'>Purchase Tickets</h1>
                   <p>Choose From Tickets Below</p>
                   <SearchInput className="search-input" onChange={this.searchUpdated} />
                   <table className='table'>
@@ -417,30 +417,25 @@ export class PurchaseTickets extends Component {
               </div>
             </div>
           </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
       </div>
     );
   }
