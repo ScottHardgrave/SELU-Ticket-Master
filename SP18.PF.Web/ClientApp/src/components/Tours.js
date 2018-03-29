@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Button } from 'reactstrap';
 import { Route } from 'react-router-dom';
 var musicPicture = require('../../src/music.jpg');
+var background = require('../../src/background.jpg');
+var logo = require('../../src/ticketslogo.jpg');
 
 export class Tours extends Component {
     displayName = Tours.name
@@ -37,7 +39,21 @@ export class Tours extends Component {
 
         return (
 
+            <div style={{ backgroundImage: `url(${background})`, backgroundSize: '1400px 1400px' }}>
+            <h1 align="center"><img src={logo} height='200px' width='500px' /></h1>
             <div>
+            <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class='container-fluid'>
+        <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
                 <h1>Tours</h1>
                 <p>All of the Tours</p>
                 <table className='table'>
@@ -66,6 +82,28 @@ export class Tours extends Component {
                         )}
                     </tbody>
                 </table>
+            </div>
+            </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             </div>
         );
     }

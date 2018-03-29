@@ -4,7 +4,10 @@ import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { Route } from 'react-router-dom';
 import { FormattedDate, FormattedRelative } from 'react-intl';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 var musicPicture = require('../../src/music.jpg');
+var background = require('../../src/background.jpg');
+var logo = require('../../src/ticketslogo.jpg');
 const KEYS_TO_FILTER = [ 'event.tourName', 'event.venueName']
 
 export class MyTickets extends Component {
@@ -63,7 +66,26 @@ export class MyTickets extends Component {
       )} />
     )
     return (
-      <div >
+      <div style={{ backgroundImage: `url(${background})`, backgroundSize: '1400px 1400px' }}>
+      <h1 align="center"><img src={logo} height='200px' width='500px' /></h1>
+      <div>
+      <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class='container-fluid'>
+  <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
+          <Element id="containerElement" style={{
+            position: 'relative',
+            height: '600px',
+            overflow: 'scroll'
+          }}>
         <h1>My Tickets</h1>
         <p>Logged in as: {this.state.logged ? userEmail : Guest }</p>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
@@ -103,6 +125,29 @@ export class MyTickets extends Component {
             })}
           </tbody>
         </table>
+        </Element>
+        </div>
+        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         </div>
     );
   }

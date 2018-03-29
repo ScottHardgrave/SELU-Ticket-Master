@@ -6,7 +6,10 @@ import { Route } from 'react-router-dom';
 import { FormattedDate, FormattedRelative } from 'react-intl';
 import { Card } from 'reactstrap';
 import {Image, Col} from "react-bootstrap";
-var logo = require('../../src/music.jpg');
+var music = require('../../src/music.jpg');
+var background = require('../../src/background.jpg');
+var logo = require('../../src/ticketslogo.jpg');
+
 
 export class MyAccount extends Component {
   displayName = MyAccount.name
@@ -61,7 +64,6 @@ export class MyAccount extends Component {
   }
 
   handleSubmit(event){
-    event.preventDefault();
     this.setState({
       itsOkay: true
     })
@@ -71,15 +73,29 @@ export class MyAccount extends Component {
   render() {
     const { userEmail, theUser } = this.state;
     return (
-
+      <div style={{ backgroundImage: `url(${background})`, backgroundSize: '1400px 1400px' }}>
+      <h1 align="center"><img src={logo} height='200px' width='500px' /></h1>
+      <div>
+      <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class='container'>
+  <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
       <form onSubmit={this.handleSubmit}>
         <Card>
-          <div align='center'>
+          <div class='form-group' align='center'>
             {theUser.map(user => {
               return (
                 <tr key={user.id}>
                   <div><h1> My Account </h1></div>
-                    <Image src={logo} width='100px' height='100px' circle />
+                    <Image src={music} width='100px' height='100px' circle />
            
                   <div><label> </label></div>
                   <div><h2>{user.email}</h2></div>
@@ -112,9 +128,36 @@ export class MyAccount extends Component {
               )
 
             })}
+             <br />
+        <br />
+        <br />
+        <br />
           </div>
         </Card>
       </form>
+      </div>
+      </div>
+      </div>
+      <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
     )
 
   }
