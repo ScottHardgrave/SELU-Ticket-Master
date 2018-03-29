@@ -368,7 +368,7 @@ export class Events extends Component {
                                                                                         name="number"
                                                                                         className="form-control"
                                                                                         placeholder="Card Number"
-                                                                                        pattern="[\d| ]{16,22}"
+                                                                                        pattern="(?<AMEX>3[47]\d\d[\s\-]?(?!(\d)\2{5}|123456|234567|345678)\d{6}[\s\-]?(?!(\d)[\s\-]{4}|12345|56789)\d{5})|(?<MASTERCARD>5[1-5]\d{2}[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{4})|(?<VISA>4\d{3}[\s\-]?(?:\d{4}[\s\-]?){2}\d(?:\d{3})?)|(?<DISCOVER>6(?:011|22?=[\s\-]?[6-9]|[3-9]|[2-8]|9[\s\-]?[01]|2[0-5]|4[4-9]\d|5\d\d)[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{4})"
                                                                                         required
                                                                                         acceptedCards={['visa', 'mastercard', 'americanexpress']}
                                                                                         onChange={this.handleInputChange}
