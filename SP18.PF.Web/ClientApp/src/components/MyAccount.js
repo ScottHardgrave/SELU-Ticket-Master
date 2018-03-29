@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { FormattedDate, FormattedRelative } from 'react-intl';
 import { Card } from 'reactstrap';
 import {Image, Col} from "react-bootstrap";
@@ -20,7 +20,6 @@ export class MyAccount extends Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateInfo = this.updateInfo.bind(this);
-    this.isValidform = this.isValidform.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUserInfo();
   }
@@ -51,7 +50,7 @@ export class MyAccount extends Component {
       })
       .then(
       alert("Updated Information! Some things may not change based on what you put in."),
-      window.location.reload(),
+      this.props.history.push('/myaccount'),
       )
 
     }
@@ -63,10 +62,13 @@ export class MyAccount extends Component {
     this.setState({[name]: value});
   }
 
-  handleSubmit(event){
+  handleSubmit(){
     this.setState({
       itsOkay: true
     })
+
+    this.updateInfo();
+
   }
 
 
@@ -86,9 +88,9 @@ export class MyAccount extends Component {
   <br />
   <br />
   <br />
-  <div class='container'>
-  <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
       <form onSubmit={this.handleSubmit}>
+      <div class='container'>
+  <div class='row' style={{ color: 'black', backgroundColor: 'white', opacity: '0.9' }}>
         <Card>
           <div class='form-group' align='center'>
             {theUser.map(user => {
@@ -120,10 +122,10 @@ export class MyAccount extends Component {
                   <input type="tel" maxLength="5" minLength="5" name="zipcode" 
                   placeholder={user.billingAddress.zipCode} 
                   class="form-control errorInputOutline"
+                  pattern="\d\d\d\d\d"
                   value={this.state.zipcode} 
                   onChange={this.handleChange} />
-                  {this.state.send ? <Button color='success' onClick={() => {this.updateInfo(this.state.address) }}>Update
-                  </Button> : <Button color='success' disabled ={this.isValidform()}> Update </Button>}
+                   <Button color='success' type='submit' value='Submit'> Update </Button>
                 </tr>
               )
 
@@ -134,9 +136,9 @@ export class MyAccount extends Component {
         <br />
           </div>
         </Card>
+        </div>
+      </div>
       </form>
-      </div>
-      </div>
       </div>
       <br />
         <br />
@@ -160,13 +162,6 @@ export class MyAccount extends Component {
       </div>
     )
 
-  }
-  isValidform() {
-    if(this.state.itsOkay == true){
-      this.setState({
-        send: true
-      })
-    }
   }
 
 
