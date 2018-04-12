@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-using SP18.PF.Mobile.Views;
 using Xamarin.Forms;
 
 namespace SP18.PF.Mobile
 {
 	public partial class App : Application
 	{
-
 		public App ()
 		{
 			InitializeComponent();
 
-
-            MainPage = new MainPage();
-        }
+			MainPage = new SP18.PF.Mobile.MainPage();
+		}
 
 		protected override void OnStart ()
 		{

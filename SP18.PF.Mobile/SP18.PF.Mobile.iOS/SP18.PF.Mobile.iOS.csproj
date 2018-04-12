@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B2CB98DB-6371-4BD0-9A0A-07D570151449}</ProjectGuid>
+    <ProjectGuid>{9FFB5614-89EE-4A1B-BC61-DF9E143284C0}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>SP18.PF.Mobile.iOS</RootNamespace>
@@ -119,35 +119,13 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_about.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_about%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_about%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_feed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_feed%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xamarin_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xamarin_logo%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xamarin_logo%403x.png" />
-  </ItemGroup>
-  <Import Project="..\SP18.PF.Mobile\SP18.PF.Mobile.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\SP18.PF.Mobile\SP18.PF.Mobile.csproj">
+      <Project>{22BE9B9D-FC66-43C8-9968-75AB71477B7B}</Project>
+      <Name>SP18.PF.Mobile</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
