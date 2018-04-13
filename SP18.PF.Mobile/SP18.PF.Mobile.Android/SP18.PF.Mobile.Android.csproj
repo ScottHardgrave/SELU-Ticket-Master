@@ -80,6 +80,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SP18.PF.Core\SP18.PF.Core.csproj">
+      <Project>{B6E8A326-9865-46A7-9E29-0DB485A72D56}</Project>
+      <Name>SP18.PF.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SP18.PF.Mobile\SP18.PF.Mobile.csproj">
       <Project>{22BE9B9D-FC66-43C8-9968-75AB71477B7B}</Project>
       <Name>SP18.PF.Mobile</Name>

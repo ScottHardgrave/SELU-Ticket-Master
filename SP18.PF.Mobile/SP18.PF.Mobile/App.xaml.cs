@@ -13,7 +13,7 @@ namespace SP18.PF.Mobile
 		{
 			InitializeComponent();
 
-			MainPage = new SP18.PF.Mobile.MainPage();
+			MainPage = new NavigationPage(new SP18.PF.Mobile.LoginPage());
 		}
 
 		protected override void OnStart ()
