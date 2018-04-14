@@ -13,5 +13,10 @@ namespace SP18.PF.Mobile
 		{
 			InitializeComponent();
 		}
-	}
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
+    }
 }

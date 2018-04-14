@@ -7,13 +7,11 @@
   <ItemGroup>
     <None Remove="Images\background.jpg" />
     <None Remove="Images\icon.png" />
-    <None Remove="Images\ticketslogo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Images\background.jpg" />
     <EmbeddedResource Include="Images\icon.png" />
-    <EmbeddedResource Include="Images\ticketslogo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +20,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SP18.PF.Core\SP18.PF.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -16,7 +16,8 @@ namespace SP18.PF.Mobile
 		public LoginPage ()
 		{
 			InitializeComponent ();
-		}
+
+        }
 
         async void OnSignUpButtonClicked(object sender, EventArgs e)
         {
@@ -27,6 +28,8 @@ namespace SP18.PF.Mobile
         {
             await Navigation.PushAsync( new SP18.PF.Mobile.MainPage());
         }
-         
+
+
+ 
     }
 }
