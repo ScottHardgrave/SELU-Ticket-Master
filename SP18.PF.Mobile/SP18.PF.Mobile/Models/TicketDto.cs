@@ -6,10 +6,10 @@ namespace SP18.PF.Mobile.Models
 {
     public class TicketDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = " ";
 
-        public string Name { get; set; }
+        public string Name { get; set; } = " ";
 
-        public string Description { get; set; }
+        public string Description { get; set; } = " ";
     }
 }

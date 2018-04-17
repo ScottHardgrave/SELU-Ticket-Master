@@ -6,9 +6,38 @@
              xmlns:local="clr-namespace:SP18.PF.Mobile"
              x:Class="SP18.PF.Mobile.MainPage">
 
-    <Label Text="Welcome to TicketsR'Us SELU!" 
-           VerticalOptions="Start" 
-           HorizontalOptions="Center" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="#404040" />
+            </Style>
+            <Style x:Key="fieldStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Button x:Name="getTicketBtn" Text="View My Tickets" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    BorderWidth="1"
+                    Clicked="GetTicketBtn_Clicked" />
+        
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout Padding="10,10,10,10" HorizontalOptions="Start">
+                <Label Text="Ticket Id" Style="{StaticResource labelStyle}" />
+                <Label Text="{Binding Id}" Style="{StaticResource fieldStyle}" />
 
+                <Label Text="Tour Name" Style="{StaticResource labelStyle}" />
+                <Label Text="{Binding Name}" Style="{StaticResource fieldStyle}" />
+
+                <Label Text="Purchase Price" Style="{StaticResource labelStyle}" />
+                <Label Text="{Binding Description}" Style="{StaticResource fieldStyle}" />
+                
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
 </ContentPage>
     
