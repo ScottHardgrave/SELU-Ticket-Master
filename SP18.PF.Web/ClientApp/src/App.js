@@ -9,12 +9,11 @@ import {PurchaseTickets} from './components/PurchaseTickets';
 import { Venues } from './components/Venues';
 import { Events } from './components/Events';
 import { Venue } from './components/Venue';
-import { MyAccount } from './components/MyAccount';
-import { Tour } from './components/Tour';
+import { RegisterPage } from './components//RegisterPage';
+import { LoginPage } from './components//RegisterPage'
 import { Events2 } from './components/Events2';
 import { Tours } from './components/Tours';
 import axios from 'axios';
-
 
 
 export default class App extends Component {
@@ -56,6 +55,8 @@ export default class App extends Component {
         <Route path='/Venue/:id' component={Venue} />
         <Route path='/Tour/:id' component={Tour} />
         <Route path='/Tours/' component={Tours} />
+        <Route path='/LoginPage' component={LoginPage} />
+        <Route path='/RegisterPage' component={RegisterPage} />
       </Layout>
     );
   }
