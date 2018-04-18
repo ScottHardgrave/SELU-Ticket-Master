@@ -8,6 +8,7 @@ namespace SP18.PF.Mobile
         public App()
         {
             InitializeComponent();
+            MainPage = new NavigationPage(new SP18.PF.Mobile.LoginPage());
         }
 
         protected override void OnStart()
