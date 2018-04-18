@@ -5,10 +5,11 @@ namespace SP18.PF.Mobile
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new SP18.PF.Mobile.LoginPage());
+            MainPage = new NavigationPage(new SP18.PF.Mobile.LoginPage()) {BarBackgroundColor = Color.DarkGreen};
         }
 
         protected override void OnStart()

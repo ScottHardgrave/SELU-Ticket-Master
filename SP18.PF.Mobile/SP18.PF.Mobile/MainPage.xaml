@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-            NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SP18.PF.Mobile"
-             x:Class="SP18.PF.Mobile.MainPage">
+             x:Class="SP18.PF.Mobile.MainPage"
+             Title="TicketsR'Us SELU">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text ="About"  
+                Priority="0" Order="Secondary"/>
+        <ToolbarItem Text ="Contact"  
+              Priority="1" Order="Secondary" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="myList" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True">
+            <ListView x:Name="myList" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="DarkGreen">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -20,11 +27,9 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding event.eventProperty}" HorizontalOptions="StartAndExpand" Grid.Row="0" TextColor="DarkGray"  FontAttributes="Bold"/>
                                 <Label Text="{Binding purchasePrice}" HorizontalOptions="StartAndExpand" Grid.Row="1" TextColor="DarkGray"  FontAttributes="Bold"/>
-                                <BoxView HeightRequest="2" Margin="0,10,10,0" BackgroundColor="Gray" Grid.Row="3" HorizontalOptions="FillAndExpand" />
                             </Grid>
                         </ViewCell>
 

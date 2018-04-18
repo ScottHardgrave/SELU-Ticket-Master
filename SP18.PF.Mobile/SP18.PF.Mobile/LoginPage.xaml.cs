@@ -27,7 +27,7 @@ namespace SP18.PF.Mobile
 
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync( new SP18.PF.Mobile.MainPage());
+            await Navigation.PushAsync( new MainPage());
         }
 
 
