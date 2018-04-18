@@ -48,6 +48,16 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='home' /> Home
               </NavItem>
             </LinkContainer>
+            <LinkContainer to={'/LoginPage'}>
+              <NavItem>
+                <Glyphicon glyph='eye-open' /> Log In
+              </NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/RegisterPage'}>
+              <NavItem>
+                <Glyphicon glyph='plus' /> Register
+              </NavItem>
+            </LinkContainer>
             <LinkContainer to={'/purchasetickets'}>
               <NavItem>
                 <Glyphicon glyph='tags' /> Purchase Tickets

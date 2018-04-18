@@ -35,4 +35,18 @@
         <ActivityIndicator x:Name="activity_indicator" IsRunning="True"/>
     </Grid>
 
+<<<<<<< HEAD
 </ContentPage> 
+=======
+                <Label Text="Tour Name" Style="{StaticResource labelStyle}" />
+                <Label Text="{Binding Name}" Style="{StaticResource fieldStyle}" />
+
+                <Label Text="Purchase Price" Style="{StaticResource labelStyle}" />
+                <Label Text="{Binding Description}" Style="{StaticResource fieldStyle}" />
+                
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
+    
+>>>>>>> e12983cc62aae3b3f139a37b76ee39a3c0bbebe9
