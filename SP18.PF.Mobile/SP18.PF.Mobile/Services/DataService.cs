@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SP18.PF.Mobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -9,7 +10,7 @@ namespace SP18.PF.Mobile.Services
 {
     public class DataService
     {
-        public static async Task<dynamic> getDataFromService(string queryString)
+        public static async Task<List<TicketDto>> getDataFromService(string queryString)
         {
             HttpClient client = new HttpClient();
             var response = await client.GetAsync(queryString);
@@ -17,8 +18,8 @@ namespace SP18.PF.Mobile.Services
             dynamic data = null;
             if (response != null)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
-                data = JsonConvert.DeserializeObject(json);
+                string json = await response.Content.ReadAsStringAsync();
+                data = JsonConvert.DeserializeObject<List<TicketDto>>(json);
             }
 
             return data;
