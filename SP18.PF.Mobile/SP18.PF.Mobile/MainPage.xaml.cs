@@ -16,7 +16,6 @@ namespace SP18.PF.Mobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
 	{
-        string heightList;
         int heightRowsList = 90;
 
         public MainPage()
@@ -25,8 +24,9 @@ namespace SP18.PF.Mobile
 
             getMyTickets();
 
+            myList.IsPullToRefreshEnabled = true;
 
-		}
+        }
 
         protected override bool OnBackButtonPressed()
         {
@@ -60,11 +60,6 @@ namespace SP18.PF.Mobile
                 i = (myTickets.Count * heightRowsList);
                 activity_indicator.HeightRequest = i;
 
-
-
-
-
-
             }
             catch (Exception e)
             {
@@ -73,5 +68,12 @@ namespace SP18.PF.Mobile
 
 
         }
+
+        private void ticket_selected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var itemSelectedData = e.SelectedItem as TicketDto;
+            Navigation.PushAsync(new TicketDetailsPage(itemSelectedData));
+        }
+
     }
 }

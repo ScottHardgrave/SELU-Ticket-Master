@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SP18.PF.Mobile.TicketDetailsPage"
+             Title="Ticket Details">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text ="About"  
+                Priority="0" Order="Secondary"/>
+        <ToolbarItem Text ="Contact"  
+              Priority="1" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+
+        <Grid x:Name="ticketDetails" VerticalOptions="Center" HorizontalOptions="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Tour and Venue:" HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0" Margin="20" FontAttributes="Bold"/>
+            <Label Text="{Binding event.eventProperty}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Row="0" Grid.Column="1" TextColor="DarkGray"  FontAttributes="Bold"/>
+
+            <Label Text="Purchase Price:" HorizontalOptions="StartAndExpand" Grid.Row="1" Grid.Column="0" Margin="20" FontAttributes="Bold"/>
+            <Label Text="{Binding purchasePrice}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Grid.Row="1" Grid.Column="1" TextColor="DarkGray"  FontAttributes="Bold"/>
+
+        </Grid>
+    </Grid>
+</ContentPage>

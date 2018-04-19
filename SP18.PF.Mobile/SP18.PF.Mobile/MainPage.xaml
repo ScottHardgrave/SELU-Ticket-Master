@@ -18,7 +18,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="myList" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="DarkGreen">
+            <ListView x:Name="myList" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="DarkGreen" ItemSelected="ticket_selected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
