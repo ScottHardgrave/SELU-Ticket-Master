@@ -24,7 +24,7 @@ namespace SP18.PF.Mobile
 
             getMyTickets();
 
-            myList.IsPullToRefreshEnabled = true;
+           
 
         }
 

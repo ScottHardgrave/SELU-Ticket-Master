@@ -36,7 +36,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <ActivityIndicator x:Name="activity_indicator" IsRunning="True" Color="DarkGray"/>
+        <ActivityIndicator x:Name="activity_indicator" IsRunning="True" Color="LightGreen"/>
     </Grid>
 </ContentPage>
 
