@@ -20,9 +20,8 @@ namespace SP18.PF.Mobile
         public TicketDetailsPage (TicketDto selectedTicket)
 		{
 			InitializeComponent ();
-
+     
             
-
             barcode = new ZXingBarcodeImageView
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -35,12 +34,11 @@ namespace SP18.PF.Mobile
             barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + " \n " + selectedTicket.purchasePrice.ToString();
 
             
-
             Content = barcode;
 
-            
 
         }
+
 
 
     }

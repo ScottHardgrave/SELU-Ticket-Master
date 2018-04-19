@@ -71,6 +71,7 @@ namespace SP18.PF.Mobile
 
         private void ticket_selected(object sender, SelectedItemChangedEventArgs e)
         {
+            DisplayAlert("Your Ticket", "Please present this at your event!", "Ok");
             var itemSelectedData = e.SelectedItem as TicketDto;
             Navigation.PushAsync(new TicketDetailsPage(itemSelectedData));
         }

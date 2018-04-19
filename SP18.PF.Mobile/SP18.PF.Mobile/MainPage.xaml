@@ -32,12 +32,11 @@
                                 <Label Text="{Binding purchasePrice}" HorizontalOptions="StartAndExpand" Grid.Row="1" TextColor="DarkGray"  FontAttributes="Bold"/>
                             </Grid>
                         </ViewCell>
-
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <ActivityIndicator x:Name="activity_indicator" IsRunning="True"/>
+        <ActivityIndicator x:Name="activity_indicator" IsRunning="True" Color="DarkGray"/>
     </Grid>
 </ContentPage>
 
