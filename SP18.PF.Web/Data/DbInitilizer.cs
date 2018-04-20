@@ -206,10 +206,10 @@ namespace SP18.PF.Web.Data
                 Name = $"Dimmsdale Dimmadome",
                 PhysicalAddress = new Address
                 {
-                    AddressLine1 = "123 South st",
-                    City = "Dimmsdale",
-                    State = "LA",
-                    ZipCode = "12345"
+                    AddressLine1 = "9200 University Blvd",
+                    City = "North Charleston",
+                    State = "SC",
+                    ZipCode = "29406"
                 },
                 Capacity = 100,
                 Description = $"Owned by Doug Dimmadome"
@@ -219,10 +219,10 @@ namespace SP18.PF.Web.Data
                 Name = $"Tiger Stadium",
                 PhysicalAddress = new Address
                 {
-                    AddressLine1 = "123 Discovery St",
+                    AddressLine1 = "Tiger Stadium",
                     City = "Baton Rouge",
                     State = "LA",
-                    ZipCode = "70805"
+                    ZipCode = "70803"
                 },
                 Capacity = 15000,
                 Description = $"Home of the tigers"
@@ -232,10 +232,10 @@ namespace SP18.PF.Web.Data
                 Name = $"House of Blues",
                 PhysicalAddress = new Address
                 {
-                    AddressLine1 = "123 Friend St",
+                    AddressLine1 = "225 Decatur St",
                     City = "New Orleans",
                     State = "LA",
-                    ZipCode = "70150"
+                    ZipCode = "70130"
                 },
                 Capacity = 500,
                 Description = $"Keeping Jazz alive"
