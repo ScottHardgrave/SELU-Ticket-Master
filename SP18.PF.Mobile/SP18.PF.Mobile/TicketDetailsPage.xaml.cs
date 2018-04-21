@@ -39,6 +39,11 @@ namespace SP18.PF.Mobile
 
         }
 
+        async void About_Selected(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage());
+        }
+
 
 
     }

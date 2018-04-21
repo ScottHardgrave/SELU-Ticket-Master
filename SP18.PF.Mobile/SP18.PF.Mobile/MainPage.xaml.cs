@@ -76,5 +76,9 @@ namespace SP18.PF.Mobile
             Navigation.PushAsync(new TicketDetailsPage(itemSelectedData));
         }
 
+        async void About_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage());
+        }
     }
 }

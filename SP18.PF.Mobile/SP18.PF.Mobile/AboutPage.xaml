@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SP18.PF.Mobile.TicketDetailsPage"
-             Title="Ticket Details">
+             x:Class="SP18.PF.Mobile.AboutPage"
+             Title="About Us">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text ="About"  
-                Priority="0" Order="Secondary" Clicked="About_Selected"/>
+        <ToolbarItem Text ="My Tickets"  
+                Priority="0" Order="Secondary" Clicked="MyTicket_Selected"/>
         <ToolbarItem Text ="Contact"  
               Priority="1" Order="Secondary" />
     </ContentPage.ToolbarItems>
-    <Label Text="Please present this QR Code at your Event in order to Enter."></Label>
-
+    <ContentPage.Content>
+        <StackLayout>
+          
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
