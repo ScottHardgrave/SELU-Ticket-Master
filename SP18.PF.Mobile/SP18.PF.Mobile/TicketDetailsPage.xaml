@@ -5,7 +5,7 @@
              Title="Ticket Details">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text ="About"  
-                Priority="0" Order="Secondary"/>
+                Priority="0" Order="Secondary" Clicked="About_Selected"/>
         <ToolbarItem Text ="Contact"  
               Priority="1" Order="Secondary" Clicked="ContactClicked" />
     </ContentPage.ToolbarItems>
