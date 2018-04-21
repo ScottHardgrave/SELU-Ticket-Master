@@ -20,8 +20,16 @@ namespace SP18.PF.Mobile
         public TicketDetailsPage (TicketDto selectedTicket)
 		{
 			InitializeComponent ();
-     
-            
+
+            Label label = new Label
+            {
+                Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString() 
+                       + "\n" + selectedTicket.user.email.ToString() +"\n" + "General Admission",
+                FontSize = 20,
+                FontAttributes = FontAttributes.Bold,
+                HorizontalOptions = LayoutOptions.Center
+            };
+
             barcode = new ZXingBarcodeImageView
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -31,10 +39,18 @@ namespace SP18.PF.Mobile
             barcode.BarcodeOptions.Width = 300;
             barcode.BarcodeOptions.Height = 300;
             barcode.BarcodeOptions.Margin = 10;
-            barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + " \n " + selectedTicket.purchasePrice.ToString();
+            barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + " \n " + "$" + selectedTicket.purchasePrice.ToString()
+                                   + "\n" + selectedTicket.user.email.ToString() + "\n" + "Valid Ticket";
 
             
-            Content = barcode;
+            Content = new StackLayout
+            {
+                Children =
+                {
+                label,
+                barcode
+                }
+            };
 
 
         }

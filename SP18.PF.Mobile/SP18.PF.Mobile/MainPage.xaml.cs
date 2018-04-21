@@ -21,11 +21,7 @@ namespace SP18.PF.Mobile
         public MainPage()
 		{
 			InitializeComponent();
-
-            getMyTickets();
-
-           
-
+            getMyTickets();       
         }
 
         protected override bool OnBackButtonPressed()
