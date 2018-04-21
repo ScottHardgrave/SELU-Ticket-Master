@@ -1,10 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SP18.PF.Mobile.LoginPage"
-             BackgroundImage="background.png">
+             BackgroundImage="background.png"
+             Title="Login">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text ="About"  
+                Priority="0" Order="Secondary"/>
+        <ToolbarItem Text ="Contact"  
+              Priority="1" Order="Secondary" Clicked="ContactClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
             <BoxView HeightRequest="10"/>

@@ -25,6 +25,11 @@ namespace SP18.PF.Mobile
             await Navigation.PushAsync(new SP18.PF.Mobile.MainPage());
         }
 
+        void ContactClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("mailto:383@envoc.com"));
+        }
+
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync( new MainPage());

@@ -16,6 +16,12 @@ namespace SP18.PF.Mobile
 
 	{
 
+
+        void ContactClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("mailto:383@envoc.com"));
+        }
+
         ZXingBarcodeImageView barcode;
         public TicketDetailsPage (TicketDto selectedTicket)
 		{
@@ -33,11 +39,14 @@ namespace SP18.PF.Mobile
             barcode.BarcodeOptions.Margin = 10;
             barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + " \n " + selectedTicket.purchasePrice.ToString();
 
-            
+
+
             Content = barcode;
 
 
         }
+
+
 
 
 

@@ -7,8 +7,9 @@
         <ToolbarItem Text ="About"  
                 Priority="0" Order="Secondary"/>
         <ToolbarItem Text ="Contact"  
-              Priority="1" Order="Secondary" />
+              Priority="1" Order="Secondary" Clicked="ContactClicked" />
     </ContentPage.ToolbarItems>
     <Label Text="Please present this QR Code at your Event in order to Enter."></Label>
+    
 
 </ContentPage>

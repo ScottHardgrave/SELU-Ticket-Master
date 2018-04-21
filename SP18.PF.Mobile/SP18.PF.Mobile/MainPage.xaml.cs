@@ -28,6 +28,11 @@ namespace SP18.PF.Mobile
 
         }
 
+        void ContactClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("mailto:383@envoc.com"));
+        }
+
         protected override bool OnBackButtonPressed()
         {
             return true;
