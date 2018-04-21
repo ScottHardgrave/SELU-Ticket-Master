@@ -26,8 +26,7 @@ namespace SP18.PF.Mobile
                 Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString() 
                        + "\n" + selectedTicket.user.email.ToString() +"\n" + "General Admission",
                 FontSize = 20,
-                FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.Center
+                FontAttributes = FontAttributes.Bold
             };
 
             barcode = new ZXingBarcodeImageView
