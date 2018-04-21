@@ -48,7 +48,7 @@ namespace SP18.PF.Mobile
             Label label4 = new Label
             {
                 Text = "Workers on the app: \n" +
-                     " Scott Hargreaves: Group Leader \n " +
+                     " Scott Hardgrave: Group Leader \n " +
                      "Connor Raiford \n" +
                      " Blake Weimer \n " +
                      "Cole Westenhiser",
