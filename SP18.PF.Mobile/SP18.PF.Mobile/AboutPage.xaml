@@ -7,7 +7,7 @@
         <ToolbarItem Text ="My Tickets"  
                 Priority="0" Order="Secondary" Clicked="MyTicket_Selected"/>
         <ToolbarItem Text ="Contact"  
-              Priority="1" Order="Secondary" />
+              Priority="1" Order="Secondary" Clicked="ContactClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

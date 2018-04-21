@@ -69,6 +69,11 @@ namespace SP18.PF.Mobile
             };
         }
 
+        void ContactClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("mailto:383@envoc.com"));
+        }
+
         async void MyTicket_Selected(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPage());
