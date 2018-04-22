@@ -1,7 +1,11 @@
-﻿using SP18.PF.Mobile.Models;
+﻿using Newtonsoft.Json;
+using SP18.PF.Mobile.Models;
+using SP18.PF.Mobile.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +15,12 @@ using ZXing.Net.Mobile.Forms;
 
 namespace SP18.PF.Mobile
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TicketDetailsPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TicketDetailsPage : ContentPage
 
-	{
+    {
 
-
+        public string VenueId;
 
         void ContactClicked(object sender, EventArgs e)
         {
@@ -24,34 +28,35 @@ namespace SP18.PF.Mobile
         }
 
         ZXingBarcodeImageView barcode;
-        public TicketDetailsPage (TicketDto selectedTicket)
-		{
-			InitializeComponent ();
+        public TicketDetailsPage(TicketDto selectedTicket)
+        {
+            InitializeComponent();
+            getVenueIdAsync();
 
-            
+
 
             Label label = new Label
             {
-                Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString() 
-                       + "\n" + selectedTicket.user.email.ToString() +"\n" + "General Admission",
+                Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString()
+                       + "\n" + selectedTicket.user.email.ToString() + "\n" + "General Admission",
                 FontSize = 20,
                 FontAttributes = FontAttributes.Bold
             };
 
-            var nasa = "";
-            if (selectedTicket.@event.VenueId == 1)
+            async void getVenueIdAsync()
             {
-                nasa = "9200 University Blvd North Charleston, SC 29406";
-            }
+                var queryString = ConnectionString.queryString;
+                var VenueIdString = queryString + "api/venues/" + selectedTicket.@event.VenueId.ToString();
+                HttpClient client = new HttpClient();
+                var response = await client.GetAsync(VenueIdString);
+                string json = response.Content.ReadAsStringAsync().Result;
 
-            if (selectedTicket.@event.VenueId == 2)
-            {
-                nasa = "Tiger Stadium Baton Rouge, LA 70803";
-            }
+                VenueDto venue = JsonConvert.DeserializeObject<VenueDto>(json);
 
-            if(selectedTicket.@event.VenueId == 3)
-            {
-                nasa = "225 Decatur St New Orleans, LA 70130";
+                VenueId = venue.PhysicalAddress.AddressLine1 + " " + venue.PhysicalAddress.City + " " + venue.PhysicalAddress.State + " " +
+                          venue.PhysicalAddress.ZipCode;
+              
+
             }
 
 
@@ -61,9 +66,7 @@ namespace SP18.PF.Mobile
                 FontSize = 20,
                 Margin = 5,
                 BackgroundColor = Color.DarkGreen,
-                TextColor= Color.White,
-                
-
+                TextColor = Color.White,
 
             };
             dir.Clicked += DirButton;
@@ -71,7 +74,7 @@ namespace SP18.PF.Mobile
 
             void DirButton(object sender, EventArgs e)
             {
-                Device.OpenUri(new Uri("geo:0,0?q="+nasa));
+                Device.OpenUri(new Uri("geo:0,0?q=" + VenueId));
             };
 
             barcode = new ZXingBarcodeImageView
@@ -99,6 +102,7 @@ namespace SP18.PF.Mobile
 
 
         }
+
 
         async void About_Selected(object sender, EventArgs e)
         {
