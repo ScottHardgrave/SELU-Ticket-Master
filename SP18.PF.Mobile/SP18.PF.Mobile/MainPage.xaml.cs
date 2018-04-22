@@ -15,13 +15,17 @@ namespace SP18.PF.Mobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
-	{
+    {
+        public static ObservableCollection<TicketDto> myTickets { get; set; }
+
         int heightRowsList = 90;
 
         public MainPage()
-		{
-			InitializeComponent();
-            getMyTickets();       
+        {
+            myTickets = new ObservableCollection<TicketDto>();
+            InitializeComponent();
+            getMyTickets();
+
         }
 
         void ContactClicked(object sender, EventArgs e)
@@ -49,8 +53,9 @@ namespace SP18.PF.Mobile
 
                 var convert = JsonConvert.DeserializeObject<List<TicketDto>>(json);
 
-                ObservableCollection<TicketDto> myTickets = new ObservableCollection<TicketDto>(convert);
+                myTickets = new ObservableCollection<TicketDto>(convert);
                 myList.ItemsSource = myTickets;
+
 
 
                 int i = myTickets.Count;
@@ -80,6 +85,18 @@ namespace SP18.PF.Mobile
         async void About_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AboutPage());
+        }
+
+        void OnRefresh(object sender, EventArgs e)
+        {
+            var list = (ListView)sender;
+            var ticketList = myTickets.ToList();
+            myTickets.Clear();
+            foreach (var ticket in ticketList)
+            {
+                myTickets.Add(ticket);
+            }
+            list.IsRefreshing = false;
         }
     }
 }
