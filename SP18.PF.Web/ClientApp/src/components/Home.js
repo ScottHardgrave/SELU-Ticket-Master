@@ -48,7 +48,7 @@ export class Home extends Component {
 
     return (
       <div style={{ backgroundImage: `url(${background})`, backgroundSize: '1400px 1400px' }}>
-        <h1 align="center"><img src={logo} height='200px' width='500px' /></h1>
+        <h1 align="center"><img src={logo} height='200px' width='400px' /></h1>
 
         <h1 style={{ textAlign: 'center' }}>Welcome to Tickets R' Us SELU! </h1>
         <br />

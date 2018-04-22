@@ -37,7 +37,7 @@ export class NavMenu extends Component {
       <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}><img src={logo} height='30px' width='75px' align="center"/></Link>
+            <Link to={'/'}><img src={logo} height='30px' width='45px' align="center"/></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
