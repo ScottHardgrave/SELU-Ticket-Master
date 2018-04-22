@@ -19,5 +19,7 @@ namespace SP18.PF.Mobile.Models
         public string tourName { get; set; }
 
         public string eventProperty { get { return tourName + ", " + venueName; } }
+
+        
     }
 }

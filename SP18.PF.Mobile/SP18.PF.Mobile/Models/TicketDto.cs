@@ -18,6 +18,12 @@ namespace SP18.PF.Mobile.Models
         public UserLoginDto user { get; set; }
 
         public EventDto @event { get; set; }
+
+        public VenueDto @venue { get; set; }
+
+
+        
+
     }
 
 }

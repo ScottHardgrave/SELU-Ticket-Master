@@ -17,6 +17,7 @@ namespace SP18.PF.Mobile
 	{
 
 
+
         void ContactClicked(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("mailto:383@envoc.com"));
@@ -27,12 +28,50 @@ namespace SP18.PF.Mobile
 		{
 			InitializeComponent ();
 
+            
+
             Label label = new Label
             {
                 Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString() 
                        + "\n" + selectedTicket.user.email.ToString() +"\n" + "General Admission",
                 FontSize = 20,
                 FontAttributes = FontAttributes.Bold
+            };
+
+            var nasa = "";
+            if (selectedTicket.@event.VenueId == 1)
+            {
+                nasa = "9200 University Blvd North Charleston, SC 29406";
+            }
+
+            if (selectedTicket.@event.VenueId == 2)
+            {
+                nasa = "Tiger Stadium Baton Rouge, LA 70803";
+            }
+
+            if(selectedTicket.@event.VenueId == 3)
+            {
+                nasa = "225 Decatur St New Orleans, LA 70130";
+            }
+
+
+            Button dir = new Button
+            {
+                Text = "Directions",
+                FontSize = 20,
+                Margin = 5,
+                BackgroundColor = Color.DarkGreen,
+                TextColor= Color.White,
+                
+
+
+            };
+            dir.Clicked += DirButton;
+
+
+            void DirButton(object sender, EventArgs e)
+            {
+                Device.OpenUri(new Uri("geo:0,0?q="+nasa));
             };
 
             barcode = new ZXingBarcodeImageView
@@ -53,7 +92,8 @@ namespace SP18.PF.Mobile
                 Children =
                 {
                 label,
-                barcode
+                barcode,
+                dir
                 }
             };
 

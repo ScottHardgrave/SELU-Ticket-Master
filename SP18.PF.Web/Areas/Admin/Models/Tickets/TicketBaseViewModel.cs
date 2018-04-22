@@ -28,5 +28,7 @@ namespace SP18.PF.Web.Areas.Admin.Models.Tickets
 
         [DisplayName("Event")]
         public int EventId { get; set; }
+
+
     }
 }
