@@ -13,6 +13,7 @@ namespace SP18.PF.Mobile.Models
         public decimal ticketPrice { get; set; }
 
         public DateTimeOffset EventStart { get; set; }
+        public string EventStartFormatted { get { return EventStart.DateTime.ToString(); } }
         public DateTimeOffset EventEnd { get; set; }
 
         public string venueName { get; set; }

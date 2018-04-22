@@ -34,7 +34,9 @@
                                 <Label Text="{Binding event.tourName, StringFormat='Tour:         {0}'}}" HorizontalOptions="StartAndExpand" Grid.Row="0" TextColor="Black"  FontAttributes="Bold"/>
                                 <Label Text="{Binding event.venueName, StringFormat='Venue:      {0}'}}" HorizontalOptions="StartAndExpand" Grid.Row="1" TextColor="Black"  FontAttributes="Bold"/>
                                 <Label  Text= "{Binding purchasePrice, StringFormat='You paid:  ${0}'}" HorizontalOptions="StartAndExpand" Grid.Row="2" TextColor="Black"  FontAttributes="Bold"/>
+                                <Label  Text= "{Binding event.EventStartFormatted, StringFormat='Starts at:  {0}'}" HorizontalOptions="StartAndExpand" Grid.Row="3" TextColor="Black"  FontAttributes="Bold"/>
                             </Grid>
+                            
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
