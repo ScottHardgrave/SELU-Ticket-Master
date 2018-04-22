@@ -31,7 +31,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding event.eventProperty}" HorizontalOptions="StartAndExpand" Grid.Row="0" TextColor="DarkGray"  FontAttributes="Bold"/>
-                                <Label Text="{Binding purchasePrice}" HorizontalOptions="StartAndExpand" Grid.Row="1" TextColor="DarkGray"  FontAttributes="Bold"/>
+                                <Label Text="{Binding event.EventStartFormatted}" HorizontalOptions="StartAndExpand" Grid.Row="1" TextColor="DarkGray"  FontAttributes="Bold"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -37,7 +37,7 @@ namespace SP18.PF.Mobile
 
             Label label = new Label
             {
-                Text = selectedTicket.@event.eventProperty.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString()
+                Text = selectedTicket.@event.eventProperty.ToString() +"\n" + selectedTicket.@event.EventStart.DateTime.ToString() + "\n " + "$" + selectedTicket.purchasePrice.ToString()
                        + "\n" + selectedTicket.user.email.ToString() + "\n" + "General Admission",
                 FontSize = 20,
                 FontAttributes = FontAttributes.Bold
@@ -86,8 +86,8 @@ namespace SP18.PF.Mobile
             barcode.BarcodeOptions.Width = 300;
             barcode.BarcodeOptions.Height = 300;
             barcode.BarcodeOptions.Margin = 10;
-            barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + " \n " + "$" + selectedTicket.purchasePrice.ToString()
-                                   + "\n" + selectedTicket.user.email.ToString() + "\n" + "Valid Ticket";
+            barcode.BarcodeValue = selectedTicket.@event.eventProperty.ToString() + "\n" + selectedTicket.@event.EventStart.DateTime.ToString() + " \n " + "$" + selectedTicket.purchasePrice.ToString()
+                                   + "\n" + selectedTicket.user.email.ToString() + "\n" + "Ticket is: Valid";
 
 
             Content = new StackLayout
