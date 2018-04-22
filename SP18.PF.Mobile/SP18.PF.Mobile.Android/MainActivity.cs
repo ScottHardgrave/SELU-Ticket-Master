@@ -21,6 +21,11 @@ namespace SP18.PF.Mobile.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            Window window = this.Window;
+            window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            window.SetStatusBarColor(Android.Graphics.Color.Rgb(50, 50, 50));
+
             LoadApplication(new App());
         }
     }

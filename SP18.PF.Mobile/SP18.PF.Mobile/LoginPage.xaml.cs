@@ -17,6 +17,7 @@ namespace SP18.PF.Mobile
 		{
 			InitializeComponent ();
             Console.WriteLine("login");
+            
 
         }
 

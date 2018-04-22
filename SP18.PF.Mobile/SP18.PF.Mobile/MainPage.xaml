@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SP18.PF.Mobile"
              x:Class="SP18.PF.Mobile.MainPage"
-             Title="TicketsR'Us SELU">
+             Title="My Tickets">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text ="About"  
                 Priority="0" Order="Secondary" Clicked="About_Clicked"/>
@@ -18,7 +18,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="myList" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="DarkGreen" ItemSelected="ticket_selected">
+            <ListView x:Name="myList" ItemsSource="{x:Static local:MainPage.myTickets}" Grid.Row="1" HorizontalOptions="FillAndExpand" HasUnevenRows="True" 
+                      SeparatorColor="DarkGreen" ItemSelected="ticket_selected"
+                      IsPullToRefreshEnabled="True" Refreshing="OnRefresh">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
