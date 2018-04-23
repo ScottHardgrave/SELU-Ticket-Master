@@ -39,7 +39,7 @@ export class Venues extends Component {
 
         return (
             <div style={{ backgroundImage: `url(${background})`, backgroundSize: '1400px 1400px' }}>
-            <h1 align="center"><img src={logo} height='200px' width='500px' /></h1>
+            <h1 align="center"><img src={logo} height='200px' width='400px' /></h1>
             <div>
             <br />
         <br />

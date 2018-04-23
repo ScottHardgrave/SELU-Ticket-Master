@@ -10,7 +10,7 @@ import { Venues } from './components/Venues';
 import { Events } from './components/Events';
 import { Venue } from './components/Venue';
 import { RegisterPage } from './components//RegisterPage';
-import { LoginPage } from './components//RegisterPage'
+import { LoginPage } from './components/LoginPage';
 import { Events2 } from './components/Events2';
 import { Tours } from './components/Tours';
 import { MyAccount } from './components/MyAccount';
