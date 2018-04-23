@@ -1,6 +1,8 @@
 Default admin login:
 admin@envoc.com / password
 
+Our Projects API string is in the class called ConnectionString
+
 Uses the new react project template for easy street:
 https://docs.microsoft.com/en-us/aspnet/core/spa/react?tabs=visual-studio
 Thus, SP18.PF.Web\ClientApp contains the react app you should work on
